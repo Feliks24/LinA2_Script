@@ -1,0 +1,117 @@
+\usepackage[utf8]{inputenc}
+\usepackage{verbatim}
+\usepackage{siunitx}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\usepackage[T1]{fontenc}
+\usepackage{fontspec}
+
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\definecolor{linkblue}{rgb}{0.1,0.3,0.7}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+
+
+\usepackage{setspace}
+%\usepackage{pgfplots}
+\usepackage{tikz}
+\usepackage{mathtools}
+\usetikzlibrary{arrows.meta}
+
+\onehalfspacing % better to read
+
+\usepackage{multirow} %multiple row for tabular env.
+\usepackage{tabularx} %table
+\usepackage{makecell}
+\usepackage{booktabs}
+\usepackage{amsmath,amssymb,amstext} %formulas ect.
+\newcommand{\angstrom}{\textup{\AA}} %the unit
+\usepackage{indentfirst} %indest first paragraph
+
+\usepackage{csquotes}
+
+\usepackage[hidelinks]{hyperref} %Links to labeled formulas
+\hypersetup{
+    colorlinks=true,
+    linkcolor=linkblue,
+    filecolor=magenta,      
+    urlcolor=linkblue,
+    citecolor=linkblue,
+    pdfpagemode=FullScreen,
+    }
+
+\usepackage[edges]{forest}
+\usepackage{color, colortbl}
+\usepackage{geometry} % more space to write on page
+\setlength{\topmargin}{-2.5cm}
+\setlength{\oddsidemargin}{0cm}
+\setlength{\evensidemargin}{0cm}
+\setlength{\textwidth}{17cm}
+\setlength{\textheight}{23cm}
+
+\usepackage{graphicx} % Subfigures
+\usepackage{subcaption}
+
+%\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{angles,quotes}
+\usepackage{centernot}
+
+%%%%%%%%%%new stuff i added for bachelors
+\newcommand{\draft}{\textcolor{red}{Draft:}}
+\newcommand{\temp}{\textcolor{red}{Temp:}}
+\newcommand{\source}{\textcolor{red}{[source?]}}
+\newcommand{\hm}{\textcolor{red}{[hmm?]}}
+\newcommand{\form}{\textcolor{red}{[formulation]}}
+
+%\newcommand{\note}[1]{\textcolor{red}{#1}}
+\usepackage{gensymb}
+\usepackage{tkz-euclide}
+
+\usepackage{ifthen}
+\newcommand{\note}[1]{%
+    \ifthenelse{\boolean{show_notes}}{%
+        \textcolor{red}{#1}%
+    }{}%
+}
+
+%add numbering thing on equation manually
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+%\setcitestyle{square}
+
+%set darkmode
+%\pagecolor[rgb]{0,0,0}
+%\color[rgb]{0.7,0.7,0.7}
+
+
+\graphicspath{ {./} }
