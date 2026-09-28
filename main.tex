@@ -1,0 +1,480 @@
+\documentclass{article}
+\include{src/headers}
+
+\usepackage{parskip}
+
+\begin{document}
+
+
+\newboolean{show_notes}
+
+\setboolean{show_notes}{false}
+
+\input{src/titlepage}
+
+\newpage
+
+
+
+
+%\include{src/list}
+
+
+
+
+\vspace*{2cm}
+\begin{center}
+\begin{minipage}{0.9\textwidth}
+{\large \hspace{2pt}\textbf{Vorwort}\vspace{1pt}}\\
+
+Das Skript ist der Vorlesung von Georg Loho parallel, wobei die Vorlesung auf
+	dem Buch G.Fiscer, B.Springborn, Lineare Algebra, Spektrum Berlin,
+	Heidelberg 2025. 
+
+Aussagen sind größtenteils wörlich kopiert aus den Vorlesungfolien genauso wie
+	diese aus dem Buch kopiert sind, allerdings nicht zwingend stylistisch
+	sowie grammatikalisch Korrekt. Beweise, Prosa und Erklärungen sind
+	allerdings nicht enthalten.  Anzumerken ist, dass der Latex-Code
+	gänzlich originel und ohne KI erstellt wurde.
+
+Das Projekt ist vorzufinden unter
+	\url{https://github.com/Feliks24/LinA2_Script}. Der Latex-Code ist zu
+	kompelieren mit xelatex.
+
+\end{minipage}
+\end{center}
+\newpage
+
+
+{
+\hypersetup{linkcolor=black}
+\tableofcontents
+}
+\newpage
+
+\section{Einführung}
+
+\textit{\small Woche 2}
+
+\textbf{Definition:} Eine Menge $R$ zusammen mit zwei Verknüpfungen
+\begin{align*}
+	+:R\times R\to R, (a,b)\mapsto a+b\\
+	\cdot:R\times R \to R, (a,b)\mapsto a\cdot b
+\end{align*}
+heißt \textbf{Ring}, wenn folgendes gilt:
+\begin{itemize}
+\item[\textbf{R1}] $R$ zusammen mit der Addition $+$ ist eine abelsche Gruppe
+\item[\textbf{R2}] Die Multiplikation $\cdot$ ist assoziativ
+\item[\textbf{R3}] Es gelten das Distributivgesetz
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Definition:} Ein Ring $R$ ist ein Integritätsring, falls gilt:
+\begin{itemize}
+\item[$i)$] $R$ ist kommutativ mit Einselement $1\neq0$
+\item[$ii)$] $R$ ist nullteilerfrei
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Anmerkung:} Ein Nullteiler für $a\neq0$ sei ein $b\neq0$, sodass
+$ab=0$. Beispiel:
+
+$\begin{pmatrix}
+	1 & 0\\
+	0 & 0
+\end{pmatrix}
+\begin{pmatrix}
+	0 & 0\\
+	0 & 1
+\end{pmatrix}=0$
+
+\textbf{Definion:} Ein Ring $R$ heißt \textbf{nullteilerfrei}, wenn für
+alle $a,b\in R$ aus $a\cdot b=0$ stets $a=0$ oder $b=0$ folgt.
+
+\textbf{Definition:} Ist $R$ ein Ring und $R'\subset R$ eine Teilmenge, so
+heißt $R'$ \textbf{Unterring}, wenn $R'$ bezüglich der Addition Untergruppe
+ist, und bezüglich der Multiplikation für $a,b\in R'$ auch $a\cdot b\in R'$.
+
+Sind $R$ und $S$ Ringe mit Verknüpfungen $+,\cdot$ und $\oplus,\odot$, so heißt
+eine Abbildung $\varphi: R\to S$ ein \textbf{Homomorphismus von Ringen}, wenn
+für alle $a,b\in R$ gilt:
+\begin{align*}
+	\varphi(a+b) = \varphi(a)\oplus\varphi(b)\\
+	\varphi(a\cdot) = \varphi(a)\odot\varphi(b)
+\end{align*}
+Zum Beispiel ist $m\mathbb{Z}\subset\mathbb{Z}$ ein Unterring und
+$\mathbb{Z}\to\mathbb{Z}/m\mathbb{Z}, a\mapsto a+m\mathbb{Z}$, ein
+Homomorphismus.
+
+\textbf{Definition:} Ist $R$ ein Ring mit Einselement $1\neq 0$, so ist seine
+\textbf{Charakteristik} erklärt durch
+\begin{align*}
+	char(R)&:= 0 \qquad \text{falls } n\cdot 1\neq 0 \text{ für alle } n\geq
+	1\\
+	&:=min\{n\in\mathbb{N}\backslash {0}:n\cdot 1 = 0\} \qquad \text{sonst}
+\end{align*}
+\textbf{Lemma:} Ist $K$ Körper, so ist char(K) entweder Null oder eine Primzahl
+
+\textbf{Wiederholung} Komplexe Zahlen: 
+\begin{itemize}
+\item $\mathbb{C}=\{x+iy: x,y\in\mathbb{R}\}$ wobei $i=\sqrt{-1}$
+\item $\mathbb{C}$ ist ein Körper mit Charakteristik 0
+\item $|x+iy| = \sqrt{x^2 + y^2}$
+\end{itemize}\vspace{\parskip}
+
+\textbf{Wiederholung (gekürzt)} Sei $K$ ein Körper, $t$ eine formale Variable
+und $a_0,\dots,a_n\in K$. Dann nennt man den Ausdruck 
+\begin{equation*}
+	f(t)=a_0t^0+a_1t^1+\dots+a_nt^n
+\end{equation*}
+ein \textbf{Polynom} in $t$. Sei $f(t)\in K[t]:=\{$Polynome in $t$ mit
+Koeffizienten as $K\}$
+
+\textbf{Bemerkung:} Ist $K$ ein Körper, so ist die Menge $K[t]$ der Polynome
+übre $K$ zusammen mit den oben definierten Verknüpfungen ein kommutativer Ring
+ohne Nullteiler. Weiter gilt
+\begin{equation*}
+	deg(f\cdot g) = deg\ f+ deg\ g \qquad \text{für } f,g\in K[t]
+\end{equation*}
+
+Dabei soll formal $n-\infty = -\infty+m= -\infty + (-\infty) = -\infty$ sein
+
+\textbf{Definition: }Sind $a,b\in R$, so heißt $b$ \textbf{Teiler} von $a$
+($b|a$), wenn es ein $c\in R$ gibt mit $a=cb$. 
+
+Ein Element $a\in R$ heißt eine \textbf{Einheit}, wenn es invertierbar ist,
+d.h., wenne es $\tilde{a}\in R$ gibt mit $a\tilde{a}= 1$.
+
+Sind $a,b\in R$ gegeben, so heißt ein $c\in R$ \textbf{gemeinsamer Teiler} von
+$a$ und $b$, wenn $c|a$ und $c|b$. 
+
+Ein gemeinsamer Teiler $d$ von $a$ und $b$ heißt ein \textbf{größter
+gemeinsamer Teiler(ggt)}, wenn $c|d$ für jeden gemeinsamen Teiler $c$.
+
+\textbf{Satz:} Sind $f,g\in K[t]$, und ist $g\neq 0$, so gibt es dazu eindeutig
+bestimmte Polynome $q,r\in K[t]$ derart, dass $f=qg+r$ und deg $r$ $<$ deg $g$.
+
+\textbf{Satz:} In den Ringen $R=\mathbb{Z}$ und $R=K[t]$ gibt es zu Elementen
+$a,b\in R$, die nicht beide 0 sind, stes einen größten gemeinsamen Teiler $d\in
+R\backslash\{0\}$.
+
+\textbf{Relation von Bézout:} Sei $R=\mathbb{Z}$ oder $R=K[t]$. Dann gibt es zu
+$a,b\in R\backslash \{0\}$ Koeffizienten $x,y\in R$ derart, dass $ggT(a,b) = xa
++yb$.
+
+\textbf{Lemma:} Ist $\lambda\in K$ eine Nullstelle von $f\in K[t]$, so gibt es
+ein eindeutig bestimmtes Polynom $g\in K[t]$ mit $f=(t-\lambda)g$ und es gilt
+$deg\ g=(deg\ f)-1$.
+
+\textbf{Korollar 1:} Sei $K$ ein beliebiger Körper, $f\in K[t]$ ein Polynom und
+$k$ die Anzahl der Nullstellen von $f$. Ist $f$ vom Nullpolynom verschieden, so
+gilt $k\leq deg\ f$.
+
+\textbf{Definition:} Ist $f\in K[t]$ vom Nullpolynom verschieden und
+$\lambda\in K$, so heißt $\mu(f;\lambda):=max\{r\in\mathbb{N}: f=(t-\lambda)^rg
+\text{ mit } g\in K[t]\}$ die Vielfachheit der Nullstelle $\lambda$ von $f$.
+
+\textbf{Fundamentalsatz der Algebra:} Jedes Polynom $f\in \mathbb{C}[t]$ mit
+$deg\ f>0$ hat mindestens eine Nullstelle in $\mathbb{C}$.
+
+\textbf{Korollar:} Jedes Polynom $f\in\mathbb{C}[t]$ zerfällt in
+Linearfaktoren, d.h. es gibt $a$ und $\lambda_1, \dots, \lambda_n\in\mathbb{C}$
+mit $n=deg\ f$, sodass $f=a(t-\lambda_1)\cdot\dots \cdot (t-\lambda_n)$.
+
+\section{Eigenwerte \& Eigenräume}
+
+\textit{\small Woche 3}
+
+\textbf{Definition:} Sei $F$ ein Endomorphismus des $K$-Vektorraums $V$. Ein
+$\lambda\in K$ heißt Eigenwert von $F$, wenn es ein $v\in V$ mit $v\neq0$ gibt,
+sodass gilt $F(v) = \lambda v$. 
+
+Jedes vom Nullvektor verschiedene $v\in V$ mit $F(v)=\lambda v$ heißt
+Eigenvektor von $F$ (zum Eigenwert $\lambda$).
+
+\textbf{Definition:} Ist $F$ ein Endomorphismus von $V$ und $\lambda\in K$, so
+nennen wir $Eig(F;\lambda):=\{v\in V:F(v)=\lambda v\}$ den Eigenraum von $F$
+bezüglich $\lambda$.
+
+\textbf{Bemerkung:} 
+\begin{itemize}
+\item[a)] $Eig(F;\lambda)\subset V$ ist ein Unterektorraum
+\item[b)] $\lambda$ ist Eigenwert von $F$ $\Leftrightarrow$
+	$Eig(F;\lambda\neq\{0\}$
+\item[c)] $Eig(F;\lambda)\backslash\{0\}$ ist die Menge der zu $\lambda$
+	gehörigen Eigenvektoren von $F$
+\item[d)] $Eig(F;\lambda) = Ker(F-\lambda I_V)$
+\item[e)] Sind $\lambda_1,\lambda_2\in K$ verschieden, so ist
+	$Eig(F;\lambda_1)\cap Eig(F;\lambda_2)=\{0\}$
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Lemma:} Gegeben seien $F\in End(V)$ und Eigenvektoren $v_1,\dots, v_m$
+zu paarweise verschiedenen Eigenwerten $\lambda_1,\dots, \lambda_m$. Dann sind
+$v_1,\dots,v_m$ linear unabhängig. Insbesondere ist $m\leq dim\ V$.
+
+\textbf{Definition:} Sei $F$ ein Endomorphismus und $\mathcal{A}$ eine Basis von
+$V$. Ist $A=M_\mathcal{A}(F)$, so nnenen wir $P_F(t):=P_A(t)$ das
+charakteristische Polynom vom $F$.
+
+\textbf{Satz:} Sei $V$ ein $K$-Vektorraum der Dimension $n<\infty$ und $F$ ein
+Endomorphismus von $V$. Dann hat das charakteristische Polynom $P_F(t)\in K[t]$
+die folgenden Eigenschaften:
+
+\begin{enumerate}
+	\item $deg\ P_F=n$
+	\item $P_F$ beschreibt die charakteristische Funktion $\tilde{P}_F:K\to
+		K, \lambda\mapsto det(F-\lambda I_V)$
+	\item Die Nullstellen von $P_F$ sind die Eigenwerte von F
+	\item Ist $A$ eine Matrix, die $F$ darstellt, so ist $P_F(t)=det(A-t E_n)$
+\end{enumerate}
+\vspace{\parskip}
+
+\textbf{Satz:} Sei $V$ ein endlichdimensionaler $K$-Vektorraum und $F\in
+End(V)$. Dann sind die folgenden Bedingungen äquivalent:
+
+\begin{itemize}
+\item[i)] $F$ ist diagonalisierbar
+\item[ii)]   	\begin{itemize}
+			\item[a)] Das charakteristische Polynom $P_F$ zerfällt
+				in Linearfaktoren und
+			\item[b)] $dim\ Eig(F;\lambda)=\mu(P_F;\lambda)$ für
+				alle Eigenwerte $\lambda$ von $F$, d.h., die
+				geometrische Vielfachheit ist gleich der
+				algebraischen Vielfachheit
+		\end{itemize}
+\item[iii)] Sind $\lambda_1,\dots,\lambda_k$ die paarweise verschiedenen
+	Eigenwerte von $F$, so ist $V = Eig(F;\lambda_1)\oplus\dots\oplus
+	Eig(F;\lambda_k)$
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Definition:} Ein Endomorphismus heißt diagonalisierbar, wenn es eine
+asis aus Eigenvektoren gibt. $A=T^{-1} D T$
+
+\textbf{Bemerkung:} Ist $dim\ V=n<\infty$, so ist $F\in End(V)$ genau dann
+diagonalisierbar, wenn es eine Basis $\mathcal{B}=(v_1,\dots,v_n)$ von $V$
+gibt, sodass $M_\mathcal{B}(F)$ eine Diagonalmatrix ist, d.h.
+\begin{equation*}
+	M_\mathcal{B}(F)=
+	\begin{pmatrix}
+		\lambda_1 & & 0\\
+		& \ddots & \\
+		0 & & \lambda_n
+	\end{pmatrix}
+\end{equation*}
+
+\textbf{Definition:} Sei $F:V\to V$ ein Endomorphismus und $\lambda$ ein
+Eigenwert von $F$. Dann heißt $\mu(P_F;\lambda)$ die algebraische Vielfachheit
+von $\lambda$ und $dim\ Eig(F;\lambda)$ die geometrische Vielfachheit von
+$\lambda$.
+
+\textbf{Lemma:} Ist $\lambda$ Eigenwert von $F$, so gilt $1\leq dim\
+Eig(F;\lambda)\leq \mu(P_F;\lambda)$.
+
+\textbf{Definition:} Ein Vektorraum $V$ heißt direkte Summe von
+Untervektorräumen $W_1,\dots, W_k$, (in Zeichen $V=W_1\oplus\dots\oplus W_k$),
+wenn folgende Bedingungen erfüllt sind:
+
+\begin{itemize} 
+\item[DS1] $V=W_1+\dots W_k$
+\item[DS2] Sind $w_1\in W_1,\dots,w_k\in W_k$ gegeben mit $w_1+\dots w_k=0$, so
+	folgt $w_1=\dots=w_k=0$
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Satz:} Für Untervektorräume $W_1,\dots,W_k$ eines endlichdimensionalen
+Vektorraums $V$ sind folgende Bedingungen äquivalent:
+
+\begin{itemize}
+\item[i)] $V=W_1\oplus\dots\oplus W_k$
+
+\item[ii)] ist für jedes $i\in\{1,\dots,k\}$ eine Basis $(v_1^{(i)},\dots,
+	v_{r_i}^{(i)})$ von $W_i$ gegeben, so ist $\mathcal{B}:=(v_{1}^{(1)},
+	\dots, v_{r_1}^{(1)},\dots , v_{1}^{(k)}, \dots , v_{r_k}^{(k)})$ eine
+	Basis von $V$
+
+\item[iii)] $V=W_1+\dots+W_k$ und $dim\ V=dim\ W_1+ \dots+dim\ W_k$
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Satz:} Sei $V$ ein endlichdimensionaler $K$-Vektorraum und $F\in
+End(V)$. Dann sind die folgenden Bedingungen äquivalent:
+
+\begin{itemize}
+\item[i)] $F$ ist diagonalisierbar
+\item[ii)]
+	\begin{itemize}
+	\item[a)] Das charakteristische Polynom $P_F$ zerfällt in
+		Linearfaktoren und
+	\item[b)] $dim\ Eig(F;\lambda)=\mu(P_F;\lambda)$ für alle Eigenwerte
+		$\lambda$ von $F$
+	\end{itemize}
+\item[iii)] Sind $\lambda_1,\dots, \lambda_k$ die paarweise verschiedenen
+	Eigenwerte von $F$, so ist $V=Eig(F;\lambda_1)\oplus\dots\oplus
+	Eig(F;\lambda_k)$
+\end{itemize}
+
+\vspace{\parskip}
+
+\section{Trigonalisierbarkeit}
+
+\textit{\small Woche 4}
+
+\textbf{Definion:} Sei $F\to V$ ein Endomorphismus und $W\subset V$ ein
+Untervektorraum. $W$ heißt $F$-invariant, wenn $F(W)\subset W$.
+
+\textbf{Bemerkung:} Ist $W\subset V$ ein $F$-invarianter Unterraum, so ist
+$P_{F|W}$ ein Teiler von $P_F$.
+
+\textbf{Definition:} Unter einer Fahne $(V_r)$ in einem $n$-dimensionalen
+Vektorraum $V$ versteht man eine Kette $\{0\} =V_0\subset
+V_1\subset\dots\subset V_n=V$ von Untervektorräumen mit $dim\ V_r=r$. Ist $F\in
+End(V)$, so heißt die Fahne $F$-invariant, wenn $F(V_r)\subset V_r$ für alle
+$r\in\{0,\dots,n\}$
+
+\textbf{Definition:} Ein Endomorphismus heißt trigonalisierbar, wenn es eine
+obere Dreiecksmatrix als Darstellungsmatrix gibt. Eine Matrix heißt
+trigonalisierbar, wenn sie ähnlich ist zu einer oberen Dreiecksmatrix.
+
+\textbf{Bemerkung:} Für $F\in End(V)$ sind folgende Bedingungen gleichwertig:
+\begin{itemize}
+\item[i)] Es gibt eine $F$-invariante Fahne in V
+\item[ii)] Es gibt eine Basis $\mathcal{B}$ von $V$, sodass $M_\mathcal{B}(F)$
+	obere Dreiecksmatrix ist
+\item[iii)] $F$ ist trigonalisierbar
+\end{itemize}
+\vspace{\parskip}
+
+\textbf{Trigonalisierungssatz:} Für einen Endomorphismus $F$ eines
+$n$-dimensionalen $K$-Vektorraums sind folgende Bedingungen äquivalent:
+\begin{itemize}
+\item[i)] $F$ ist trigonalisierbar
+\item[ii)] Das charakteristische Polynom $P_F$ zerfällt in Linearfaktoren, d.h.
+	\begin{equation*}
+		P_F=\pm(t-\lambda_1)\cdot\dots\cdot(t-\lambda_n)\qquad\text{mit
+		}\lambda_1,\dots,\lambda_n\in K
+	\end{equation*}
+\end{itemize}
+
+\textbf{Korollar:} Jeder Endomorpismus eines endlichdimensionalen komplexen
+Vektorraums ist trigonalisierbar.
+
+\section{Jordan'sche Normalform}
+\textit{\small Woche 5}
+
+\textbf{Definition:} Ein Jordan-Block der Größe zum Eigenwerte
+$\lambda$ ist die quadratische $n\times n$-Matrix
+
+\begin{equation*}
+	J_n(\lambda):=
+\begin{pmatrix}
+	\lambda & 1 & & & & 0\\
+	& \lambda & 1 & & &  \\
+	& & \ddots & \ddots & &  \\
+	& &  & & \lambda & 1 \\
+	0 & &  & & & \lambda\\
+\end{pmatrix}
+\end{equation*}
+
+\textbf{Definition:} Eine Jordan-Matrix ist eine Blockdiagonalmatrix mit
+Jordan-Blöcken in der Diagonalen, d.h. eine Matrix der Form
+
+\begin{equation*}
+	\begin{pmatrix}
+		J_{r_1}(\lambda_1) & & & 0\\
+		& J_{r_2}(\lambda_2)  & & \\
+		& & \ddots &\\
+		0 & & & J_{r_n}(\lambda_n)\\
+	\end{pmatrix}
+\end{equation*}
+
+wobei die Eigenwerte $\lambda_1,\dots,\lambda_l$ der Jordan-Blöcke nicht
+verschieden sein müssen. Man sagt auch, eine Matrix habe Jordansche Normalform,
+wenn sie eine Jordan-Matrix ist.
+
+Die Summe der Größen der Jordan-Blöcke zu einem Eigenwerte $\lambda$ ist also
+die algebraische Vielfachheit des Eigenwerts:
+$\mu(P_F;\lambda)=\sum_{j:\lambda_j=\lambda}r_j.$
+
+Die Anzahl der Jordan-Blöcke zu einem Eigenwert $\lambda$ ist also die
+geometrische Vielfachheit des Eigenwerts: $dim\
+Eig(F;\lambda)=\sum_{j:\lambda_j=\lambda}1$.
+
+\textbf{Anmerkung:} Somit sind Diagonalmatrizen Spezialfälle von
+Jordan-Matrizen, wobei jeder Jordan-Block jeweils die Größe $1\times1$ hat.
+
+\textbf{Satz von der Jordanschen Normalform:} Sei $V$ ein endlichdimensionaler
+Vektorraum übre einem algebraisch abgeschlossenen Körper, und sei $F\in
+End(V)$. Dann igbt es eine Basis $\mathcal{B}$ von $V$, bezüglich der die
+darstellende Matrix $M_\mathcal{B}(F)$ Jordansche Normalform hat. Diese
+Jordan-Matrix $M_\mathcal{B}(F)$ ist bis auf die Reihenfolge der Jordan-Blöcke
+durch den Endomorphismus $F$ eindeutig bestimmt.
+
+\textbf{Satz von der Jordanschen Normalform (Matrix):} Sei $K$ ein algebraisch
+abgeschlossener Körper, und sei $A\in M(n\times x;K)$. Dann ist $A$ ähnlich zu
+einer Matrix $J$ in Jordanscher Normalform. Das heißt, es gibt eine Matrix
+$T\in GL(n;K)$, sodass $J=TAT^{-1}$ eine Jordan-Matrix ist. Diese Jordan-Matrix
+$J$ ist bis auf die Reihenfolge der Jordan-Blöcke durch die Matrix $A$
+eindeutig bestimmt.
+
+\textbf{Satz:} Quadratische Matrizen über einem algebraisch abgeschlossenen
+Körper sind genau dann ähnlich, wenn sie(bis auf die Reihenfolge der
+Jordan-Blöcke) die gleiche Jordansche Normalform haben.
+
+\textbf{Anmerkung:} Ein algebraisch abgeschlossener Köper $K$ ist ein Körper
+für welchen gilt: $K[t]$ zerfällt in Linearfaktoren. Zum Beispiel $\mathbb{C}$
+aber nicht $\mathbb{R}$
+
+\textbf{Definition:} Gegeben sei $K$-Vektorraum $V$ und $F\in End(V)$ dann sei
+\begin{itemize}
+\item[i)] ein Hauptvektor erste Stufe zum Eigenwert $\lambda$ der Eigenvektor
+	von $F$ zum Eigenwert $\lambda$
+\item[ii)] ein Hauptvektor der Stufe $k\geq2$ zum Eigenwert $\lambda$ ein
+	Vektor $v\in V$, sodass $F(v)=\lambda v+ v'$ wobei $v'$ ein Hauptvektor
+	der Stufe $k-1$ zum Eigenwert $\lambda$ ist
+\end{itemize}
+
+\textbf{Lemma:} Ein Vektor $v\in V$ ist genau dann Hauptvektor der Stufe
+$k\geq1$ zum Eigenwert $\lambda$, wenn $(F-\lambda I_V)^k(v)=0$ aber
+$(F-\lambda I_V)^{k-1}(v)\neq0$.
+
+\textbf{Definition:} Eine Familie $(v_1,\dots, v_k)$ heißt eine Jordan-Kette
+von $F$ zum Eigenwert $\lambda$, wenn $v_k$ ein Hauptvektor der Stufe $k$ ist
+und für $j\in\{1,\dots,k-1\}$ gilt $v_j=(F-\lambda I_V)(v_{j+1})$. Insbesondere
+ist dann $v_j$ ein Hauptvektor der Stufe $j$ zum selben Eigenwert $\lambda$.
+
+\textbf{Satz von der Jordanschen Normalform (Jordan-Ketten):} Sei $V$ ein
+endlichdimensionaler Vektorraum über einem algebraisch abgeschlossenen Körper,
+und sei $F\in End(V)$. Dann gibt es eine Basis $\mathcal{B}$ von $V$, die aus
+Jordan-Ketten von $F$ besteht. Dabei sind die Anzahlen der Jordan-Ketten zu
+jedem Eigenwert und ihre Längen durch den Endomorphismus $F$ eindeutig
+bestimmt.
+
+\textbf{Algorithmus:} Bestimmung der Jordanschen Normalform
+\begin{enumerate}
+	\item Eigenwerte bestimmen
+	\item Für jeden Eigenwert
+		\begin{enumerate}
+			\item bestimme linear unabhängige Hauptvektoren der
+				höchsten Stufe
+			\item berechne zugehörige Jordan-Kette
+		\end{enumerate}
+\end{enumerate}
+
+\textit{\small Woche 6}
+
+\textit{\small Woche 7}
+
+\textit{\small Woche 8}
+
+\textit{\small Woche 9}
+
+\textit{\small Woche 10}
+
+\textit{\small Woche 11}
+
+\textit{\small Woche 12}
+
+\end{document}
+
