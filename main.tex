@@ -88,7 +88,7 @@ $\begin{pmatrix}
 	0 & 1
 \end{pmatrix}=0$
 
-\textbf{Definion:} Ein Ring $R$ heißt \textbf{nullteilerfrei}, wenn für
+\textbf{Definition:} Ein Ring $R$ heißt \textbf{nullteilerfrei}, wenn für
 alle $a,b\in R$ aus $a\cdot b=0$ stets $a=0$ oder $b=0$ folgt.
 
 \textbf{Definition:} Ist $R$ ein Ring und $R'\subset R$ eine Teilmenge, so
@@ -476,11 +476,463 @@ dann gilt $p(F):=a_0I_V+a_1F+\dots+a_dF^d\in End(V)$ wobei $F^k=F\circ\dots
 \circ F$. Sei weiterhin $A\in M(n\times n,K)$ dann sei $p(A):= a_0 E_n
 +a_1A+\dots+a_dA^d\in M(n\times n,K)$.
 
+\textbf{Beobachtungen:} 
+
+a) Sei $v$ Eigenvektor von $F$ zum Eigenwert $\lambda$. So
+ist $v$ auch ein Eigenvektor von $p(F)$ zum Eigenwert $p(\lambda)$
+
+Sei $V$ ein endlichdimensionaler $K$-Vektorraum und $F\in End(V)$ sei
+diagonalisierbar, dann gilt $p_F(F)=0$. Parallel dazu gilt wenn $A\in M(n\times
+n, K)$ diagonalisierbar dann ist auch $p_A(A)=0$.
+
+b) Sei $F$ diagonalisierbar, dann ist auch $p(F)$ diagonalisierbar.
+
+c) Gegeben sei eine Diagonalmatrix $D$ dann gilt
+\begin{equation*}
+	D=\begin{pmatrix}
+	\lambda_1 & & 0\\
+	& \ddots &\\
+		0& & \lambda_n
+	\end{pmatrix}
+\implies
+D^k=\begin{pmatrix}
+	\lambda_1^k & & 0\\
+	& \ddots &\\
+		0& & \lambda_n^k
+	\end{pmatrix}
+	\text{ und  }
+p(D)=\begin{pmatrix}
+	p(\lambda_1) & & 0\\
+	& \ddots &\\
+		0& & p(\lambda_n)
+	\end{pmatrix}
+\end{equation*}
+
+d) Sei $A$ und $B=TAT^{-1}$ ähnlich mit $T\in GL(n,K)$, so gilt $p(A)$ und
+$p(B)=Tp(A)T^{-1}$ ähnlich.
+
+\textbf{Definition:} Die Einsetzungshomomorpihsmen für Elemente $x\in K,F\in
+End(V)$ und $A\in M(n\times n; K)$ sind die Abbildungen
+
+\begin{alignat*}{2}
+	&ev_x:\ K[t] \to K, \quad && ev_x(p) = p(x)\\
+	&ev_F:\ K[t] \to End(V), && ev_F(p) = p(F)\\
+	&ev_A:\ K[t] \to M(n\times n;K), && ev_A(p)=p(A)
+\end{alignat*}
+
+\textbf{Bemerkung:} Die Einsetzungshomomorphismen sind Homomorphismen von
+Algebren, d.h. sie sind lineare Abbildungen und Homomorphismen von Ringen.
+
+Für Homomorphismen von Ringen gilt
+\begin{align*}
+	\mu(a+b) = \mu(a) \oplus \mu(b)\\
+	\mu(a\times b) = \mu(a) \otimes \mu(b)
+\end{align*}
+
+\textbf{Beobachtung:} $Ker(ev_F)=$ die Menge aller Polynome $p\in K[t]$ mit
+$p(F)=0$.
+
+\textbf{Beobachtung:} $Ker(ev_F)$ ist ein Ideal von $K[t]$.
+
+\textbf{Wiederholung:} Gegeben sei ein Ring $R$, dann ist $\mathcal{I} \subset
+R$ ein Ideal falls gilt:
+
+\begin{itemize}
+\item[i)] $\forall x,y\in \mathcal{I}: x+y\in\mathcal{I}$ genauer
+	$(\mathcal{I},+)$ ist eine abelsche Gruppe.
+\item[ii)] $\forall r\in R\ \forall z\in\mathcal{I}: r\cdot z\in\mathcal{I}$
+\end{itemize}
+
+\textbf{Definition:} Für jedes Element $m\in R$ ist $mR=\{m\cdot r: r\in R\}$
+ein Ideal, das von m erzeugte Ideal.
+
+\textbf{Satz:} Wenn $\mathcal{I}$ ein Ideal von $\mathbb{Z}$ ist, dann ist
+$\mathcal{I}=m\mathbb{Z}$, wobei $m$ entweder die kleinste positive Zahl ist,
+di in $\mathcal{I}$ enthalten ist, oder $m=0$, wenn $\mathcal{I}=\{0\}$.
+
+\textbf{Satz:} Jedes Ideal $\mathcal{I}$ von $K[t]$ ist entweder das Nullideal
+oder es gibt genau ein normiertes Polynom $m\in K[t]$ mit $\mathcal{I}=mK[t]$.
+
+\textbf{Definition:} Für den Endomorphismus $F\in End(V)$ sei das Ideal
+$\mathcal{I}_F$ nicht das Nullideal. Dann nennt man das eindeutig bestimmte
+normierte Polynom, das das Ideal $\mathcal{I}_F$ erzeugt, das Minimalpolynom
+von $F$. Wir bezeichnen das Minimalpolynom von $F$ mit $M_F$. Für eine Matrix
+$A\in M(n\times n;K)$ definiert man ganz analog das Ideal $\mathcal{I}_A\subset
+K[t]$ und das Minimalpolynom $M_A\in K[t]$.
+
+\textbf{Satz:} Sei $F$ ein Endomorphismus mit Jordanscher Normalform
+$J=M_\mathcal{B}(F)$, und seien $\lambda_1, \dots, \lambda_k$ die paarweise
+verschiedenen Eigenwerte von $F$. Ferner sie $m_j$ die Größe des größten
+Jordan-Blocks zum Eigenwert $\lambda_j$, der in der Jordan-Matrix J vorkommt.
+Das Minimalpolynom von $F$ ist dann
+\begin{equation*}
+	M_F=(t-\lambda_1)^{m_1}\dots(t-\lambda_k)^{m_k}.
+\end{equation*}
+
+\textbf{Satz von Cayley-Hamilton:} Sei $V$ ein endlichdimensionaler
+$K$-Vektorraum, $F\in End(V)$ und $P_F\in K[t]$ sein charakteristishces
+Polynom. Dann ist $P_F(F)=0\in End(V)$. Für die Matrix $A\in M(n\times n;K)$
+gilt analog $P_A(A)=0\in M(n\times n;K)$.
+
+\textbf{Korollar}: Das Minimalpolynom $M_F$ teilt das charakteristische Polynom
+$P_F$. Insbesondere ist $deg\ M_F\leq deg\ P_F=dim\ V$.
+
 \textit{\small Woche 7}
+
+\textbf{Hinweis:} In dieser Woche wird der Beweis der Jordan-Normalform
+angegangen. Da dieses Skript auf Beweise im allgemeinen nicht fokusiert ist,
+ist dieses Skript etwas Bruchhaft in diesem Abschnitt da es nur die Sätze und
+Definition notiert die den Beweis begleiten.
+
+\textbf{Definition:} Hauptram von $F\in End(V)$ zu $\lambda\in K$ sei definiert
+als:
+\begin{align*}
+	Hau(F;\lambda) &:=\{v\in V:(F-\lambda I_V)^kv=0\text{ für ein
+	k}\in\mathbb{N}\}\\
+	&= \mathop{\bigcup}_{k\in\mathbb{N}}Ker(F-\lambda I_V)^k.
+\end{align*}
+
+\textbf{Satz von der Hauptraumzerlegung:} Sei $V$ ein endlichdimensionaler
+Vektorraum über einem beliebigen Körper $K$, sei $F\in End(V)$, und sei
+$q(F)=0$ für ein in Linearfaktoren zerfallendes nicht konstantes Polynom
+\begin{equation*}
+q=(t-\lambda_1)^{n_1}\dots(t-\lambda_k)^{n_k}\in K[t],
+\end{equation*}
+wobei $\lambda_1,\dots,\lambda_k\in K$ die verschiedenen Nullstellen von $q$
+seien. Dann ist $V$ die direkte Summe
+\begin{equation*}
+V=Ker(F-\lambda_1 I_V)^{n_1}\oplus\dots\oplus Ker(F-\lambda_k I_V)^{n_k}
+\end{equation*}
+der $F$-invarianten Unterräume $Ker(F-\lambda_j I_V)^{n_j}$.
+
+\textbf{Lemma:} Sei $V$ ein endlichdimensionaler Vektorraum über einem
+beliebigen Körper $K$, sei $f\in End(V)$, und sei $q(F)=0$ für ein nicht
+verschwindendes Polynom $q\in K[t]$. Wenn $q$ in zwei teilerfremde Faktoren
+zerfällt also wenn $q=q_1q_2$ mit $ggT(q_1,q_2)=1$ dann gilt
+
+\begin{itemize}
+\item[i)] $Ker\ q_1(F) = Im\ q_2(F)$ und $Ker\ q_2(F)=Im\ q_2(F)$
+\item[ii)] $Ker\ q_1(F)$ und $Ker\ q_2(F)$ sind invariante Unterräume von $F$
+\item[iii)] $V=Ker\ q_1(F)\oplus Ker\ q_2(F)$
+\end{itemize}
+
+\textbf{Korollar:} Sei $q\in K[t]$ mit $q(F)=0$, und sei $q=q_1\dots q_k$ mit
+paarweise teilerfremden Faktoren $q_j$. Dann sind die Untervektorräume $Ker\
+q_j(K)$ invariant unter $F$ und es gilt $V=Ker\ q_1(F)\oplus\dots\oplus Ker\
+q_k(F)$.
+
+\textbf{Definition:} Man nennt einen Endomorphismus $F\in End(V)$ nilpotent,
+wenn $F^d= F\circ\dots\circ F=0$ für eine positive ganze Zahl $d\neq0$.
+Entsprechend nennt man auch eine quadratische Matrix $A\in M(n\times n;K)$
+nilpotent, wenn $A^d=0$ für eine positive ganze Zahl $d\neq0$.
+
+\textbf{Satz von der Normalform eines nilpotenten Endomorphismus:} Sie $V$ ein
+endlichdimensionaler Vektorraum über einem beliebigen Körper $K$, sie $G\in
+End(V)$ nilpotent, und sei $d$ die kleinste positive Zahl mit $G^d=0$.
+
+\begin{itemize}
+\item[i)] Dann gibt es eine Basis $\mathcal{B}$ von $V$, sodass
+	$M_\mathcal{B}(G)$ mindestens einen Jordan-Block der Größe $d$. Für
+	$m<d$ kann die Anzahl $s_m$ der Jordan-Blöcke $J_m$ auch null sein.
+\item[ii)] Diese Matrix $M_\mathcal{B}(G)$ ist durch den Endomorphismus $G$
+	eindeutig bestimmt, d.h. für $1\leq m \leq d$ ist die Anzahl $s_m$ der
+	Jordan-Blöcke $J_m$ eindeutig bestimmt.
+\end{itemize}
+
+\textbf{Hinweis (informell):} Der letze Satz enthält eine Matrixdarstellung,
+die ich wegglasse. Trotz der Darstellung fand ich diesen Satz recht verwirred
+deshalb einmal informell: Einerseits ist bereits impliziert dass alle
+Eigenwerte $0$ sind, das geht aus der nilpotent Eigenschaft hervor wird aber
+hier nicht explizit erwähnt. $s_m$ Ist die Anzahl von $J_m$ also die Anzahl der
+Jordan-Blöcke mit größe $m$. Dabei besagt i) dass $s_d\geq 1$ und ii) gibt eine
+Aussage über die eindeutigkeit.
+
+\section{Bilinearformen und Skalarprodukte}
 
 \textit{\small Woche 8}
 
+\textbf{Hinweis:} Diese Woche befasst sich mit einer Wiederholung, dessen
+Inhalt bereits aus Lina1 und Anfang Ana2 hervor gehen. Interessanter wird es ab
+nächste Woche.
+
+\textbf{Definition:} Das kanonische Skalarprodukt entspricht einer Abbildung
+folgender Form $\langle\cdot,\cdot\rangle: \mathbb{R}^n \times
+\mathbb{R}^n\to\mathbb{R}, (x,y)\mapsto\langle x,y\rangle$. Sind
+$x,y\in\mathbb{R}^n$ Spaltenvektoren so ist $\langle x,y\rangle = x^t\cdot y$.
+
+\textbf{Beispiel}: Sei $A,B\in M(n\times n,K)$ und $C=A\cdot B$, sei $a_i$ der
+$i$-te Zeilenvektor von $A$, $b_j$ der $j$-te Spaltenvektor von $B$, $c_{i,j}$
+ein Eintrag von $C$ entsprechend den Indizes. So ist $c_{i,j}=\langle
+a_i,b_j\rangle$
+
+\textbf{Definition: } sei $x,x',y,y'\in\mathbb{R}^n$ und $\lambda\in\mathbb{R}$
+so gelten folgende Grundlegende Eigenschaften:
+\begin{alignat*}{2}
+	1.&\langle x+x',y\rangle = \langle x,y\rangle + \langle
+	x',y\rangle,\quad&&
+	\langle x,y+y'\rangle = \langle x,y\rangle + \langle x,y'\rangle,\\
+	&\langle \lambda x,y\rangle=\lambda\langle x,y\rangle,&&
+	\langle x,\lambda y\rangle=\lambda\langle x,y\rangle\\
+	2.&\langle x,y\rangle = \langle y,x\rangle\\
+	3.&\mathrlap{\langle x,y\rangle \geq0,\text{ wobei }\langle x,x\rangle
+	=0\text{ nur für $x=0$ gilt}}
+\end{alignat*}
+
+\textbf{Definition:} Aufgrund der Eigenschaften des Skalarprodukts lässt sich
+\textit{eine} (induzierte) Norm wie folgt definieren:
+\begin{equation*}
+||\cdot||:\mathbb{R}^n\to\mathbb{R}_+,\ x\mapsto||x||:=\sqrt{\langle
+x,x\rangle}
+\end{equation*}
+
+\textbf{Definition:} Die folgende Metrik sei \textit{eine} (induzierte) Metrik:
+\begin{equation*}
+	d:\mathbb{R}^n\times \mathbb{R}^n\to R_+, d(x,y):=||y-x||.
+\end{equation*}
+
+\textbf{Hinweis:} Hier ist besonders betont, dass die Metrik und Norm die
+gezeigt wird, eine Metrik/Norm vieler sind und spezifisch diese Norm vom
+Skalarprodukt induziert ist und parallel die gegeben Metrik von der vorherigen
+Norm induziert ist. Sei das Skalarprodukt entsprechend das kanonische so ist
+die induzierte Norm auch bekannt als die Euklidische Norm und die induzierte
+Metrik der Euklidische Abstand. Die folgenden Eigenschaften gelten allerdings
+für alle Normen und Metriken. Später impliziert Cauchy-Schwarz allerdings, dass
+die Norm von einem Skalarprodukt induziert ist und weiterhin gilt dies dann
+auch für alle Normen assoziert mit einem Skalarprodukt, ob kanonisch oder
+nicht.
+
+\textbf{Beobachtung:} Die wichtigsten Eigenschaften von Norm und Abstand sind
+die folgenden
+\begin{align*}
+	N1\quad& ||x||=0\iff x=0,\\
+	N2\quad& ||\lambda x||=|\lambda|\cdot ||x||,\\
+	N3\quad& ||x+y||\leq ||x||+||y||, & \text{Dreiecksungleichung}\\
+	D1\quad& d(x,y)=0\iff x=y\\
+	D2\quad& d(y,x)=d(x,y), & \text{Symmetrie}\\
+	D3\quad& d(x,z)\leq d(x,y)+d(y,z). & \text{Dreiecksungleichung}
+\end{align*}
+
+\textbf{Ungleichung von Cauchy-Schwarz:} Für $x,y\in\mathbb{R}^n$ gilt:
+\begin{equation*}
+	|\langle x,y\rangle|\leq ||x||\cdot ||y||
+\end{equation*}
+Sind $x,y$ linear abhängig dann gilt:
+\begin{equation*}
+	|\langle x,y\rangle|=||x||\cdot ||y||
+\end{equation*}
+
+\textbf{Definition:} Zwei Vektoren $x,y\in\mathbb{R}^n$ heißen
+orthogonal$(\perp)$ wenn $\langle x,y\rangle=0$. Sind $x,y\neq 0$, so gilt
+offenbar $x\perp y\iff\measuredangle(x,y)=\frac{\pi}{2}$.
+
+\textbf{Definition:} Die Definition für den Winkel kann man auch in folgender
+Form schreiben $\langle x,y\rangle=||x||\cdot||y||\cdot
+cos\measuredangle(x,y)$.
+
+Diese formel erlaubt eine geometrische Erklärung des Skalarprodukts als Produkt
+von $||x||$ und $||y||\cdot cos\measuredangle(x,y)$, wobei der zweiter Faktor
+gleich der senkrechten Projection des Vektors $y$ auf die durch $x$
+aufgespannte Gerade ist.
+
+\textbf{Definition:} Das Vektorprodukt für $n=3$ definiert sich wie folgt:
+\begin{alignat*}{2}
+	&\mathbb{R}^3\times\mathbb{R}^3\to\mathbb{R}^3,&&(x,y)\mapsto x\times
+	y,\\
+	&\mathrlap{x\times y:=(x_2y_3-x_3y_2,x_3y_1-x_1y_3,x_1y_2-x_2y_1),}\\
+	\text{oder äquivalent: } & \mathrlap{x\times y = det
+	\begin{pmatrix}
+		e_1 & e_2 & e_3\\
+		x_1 & x_2 & x_3\\
+		y_1 & y_2 & y_3
+	\end{pmatrix}}
+\end{alignat*}
+
+Für das Vektorprodukt, $x,x',y,y'\in\mathbb{R}^3$ und $\lambda\in\mathbb{R}$
+gelten folgende grundlegende Rechenregeln:
+\begin{alignat*}{2}
+	1.\quad&(x+x')\times y=x\times y+x'\times y \quad&& x\times(y+y')=x\times
+	y+x\times y',\\
+	& \lambda x\times y=\lambda(x\times y), && x\times \lambda
+	y=\lambda(x\times y),\\
+	2.\quad&y\times x=-x\times y,  && x\times x=0,\\
+	3.\quad&\mathrlap{x\times y= 0\iff x,y\text{ linear unabhängig.}}
+\end{alignat*}
+
+\textbf{Bemerkung:} Für $x,y,z\in\mathbb{R}^3$ gilt:
+\begin{alignat*}{2}
+	a)\quad&\langle x\times y, z\rangle=det
+	\begin{pmatrix}
+		x_1&x_2&x_3\\
+		y_1&y_2&y_3\\
+		z_1&z_2&z_3
+	\end{pmatrix},\quad&&
+	\langle x\times y,x\rangle = \langle x\times y, y\rangle =0\\
+	b)\quad&||x\times y||^2=||x||^2||y||^2-\langle x,y\rangle^2, && 
+	||x\times y||=||x||\cdot||y||\cdot sin\measuredangle(x,y).
+\end{alignat*}
+
+Das Produkt $\langle x\times y,z\rangle$ wird auch Spatprodukt genannt.
+
+\textbf{Grassmann-Identität:}
+\begin{equation*}
+	x\times (y\times z) = \langle x,z\rangle y - \langle x,y\rangle z
+\end{equation*}
+
+\textbf{Jacobi-Identität:}
+\begin{equation*}
+	x\times(y\times z)+y\times(z\times x)+z\times(x\times y)=0
+\end{equation*}
+
+\textbf{Definition:} Zu einer komplexen Zahl $z=x+iy$ ist definiert
+$\bar{z}=x-iy$ und $|z|=\sqrt{z\bar{z}} =\sqrt{x^2+y^2}$. 
+
+Die Zahl $z\in\mathbb{C}$ entspricht der Vektor $(x,y\in\mathbb{R}^2$, und mit
+der euklidischen Norm gilt dann $|z|=||(x,y)||$.
+
+Für die Geometrie des $\mathbb{C}^n$ ist die folgende Abbildung entsprechend
+dem kanonischen Skalarprodukt:
+
+\begin{alignat*}{2}
+	&\mathbb{C}^2\times \mathbb{C}^2\to\mathbb{C}\quad, &&
+	(z,w)\mapsto\langle z,w\rangle\rangle_c\\
+	&\langle z,w\rangle_c:=z_1\bar{w}_1+\dots+z_n\bar{w}_n
+\end{alignat*}
+
+Für das kanonische Skalarprodukt in $\mathbb{C}$ mit $z,z',w,w'\in\mathbb{C}^n$
+und $\lambda\in\mathbb{C}$ gelten folgende Rechenreglen:
+
+\begin{alignat*}{2}
+	1.&\langle z+z',w\rangle = \langle z,w\rangle + \langle
+	z',w\rangle,\quad&&
+	\langle z,w+w'\rangle = \langle z,w\rangle + \langle z,w'\rangle,\\
+	&\langle \lambda z,w\rangle=\lambda\langle z,w\rangle,&&
+	\langle z,\lambda w\rangle=\bar\lambda\langle z,w\rangle\\
+	2.&\langle z,w\rangle = \overline{\langle w,z\rangle}\\
+	3.&\mathrlap{\langle z,z\rangle \in\mathbb{R}_+,\text{ und }\langle
+	z,z\rangle
+	=0\iff z=0}
+\end{alignat*}
+
+\textbf{Hinweis:} Der Index $c$ wird vorübergehend angehängt um auf den
+Unterschied zum Skalarprodukt im $\mathbb{R}^n$ hinzuweisen. Zu bemerken ist,
+dass das hier definierte kanonische Skalarprodukt angewendet auf reele Zahlen
+dem kanonischen Produkt entspricht was zuvor definiert wurde. Eben hier besteht
+oft Verwirrung, den in $\mathbb{R}$ behandelt man das Skalarprodukt als
+bilinear, also linear in beiden Argumenten, allerdings ist es im allgemeinen
+nicht bilinear!
+
 \textit{\small Woche 9}
+
+\textbf{Bilinearform:} 
+\begin{alignat*}{2}
+	&\mathrlap{s:V\times V\to K,\quad(v,w)\mapsto s(v,w),}\\
+	B1\quad&s(v+v',w)=s(v,w)+s(v',w),\quad && s(\lambda v,w)=\lambda
+	s(v,w),\\
+	B2\quad&s(v,w+w')=s(v,w)+s(v,w'),&& s(v,\lambda w)=\lambda s(v,w).
+\end{alignat*}
+
+Weiterhin kann man Bilinearform wie folgt kategorisieren entsprechend der
+jeweiligen Eigenschaft
+\begin{alignat*}{2}
+	&\text{symmetrisch:  } &&s(v,w) = s(w,v)\\
+	&\text{alternierend:  } &&s(v,w) = -s(w,v)
+\end{alignat*}
+
+\textbf{Bemerkung:} Sei $S$ eine Bilinearform auf $V$ mit Basis
+$\mathcal{B},\Phi_\mathcal{B}:K^n\to V$ das zugehörige Koordinatensystem. Wir
+betrachten die Matrix $A=M_\mathcal{B}(s)$ und für $v,w\in V$ die Koordinaten
+$x=\Phi_\mathcal{B}^{-1}(v),y=\Phi_\mathcal{B}^{-1}(w)$. Dann ist
+
+\begin{equation*}
+	s(v,w)=x^TAy=(x_1,\dots,x_n)
+	\begin{pmatrix}
+		a_{1,1}&\dots &a_{1,n}\\
+		\vdots & & \vdots\\
+		a_{n,1}&\dots &a_{n,n}\
+	\end{pmatrix}
+	\begin{pmatrix}
+		y_1\\ \vdots\\ y_n
+	\end{pmatrix}
+\end{equation*}
+
+Weiterhin hat $A$ folgende Form
+\begin{equation*}
+	A=M_\mathcal{B}(s)=(s(v_i,v_j))_{i,j}\in M(n\times n;K)
+\end{equation*}
+
+\textbf{Satz:} Sei $V$ ein $K$-Vektorraum mit $n=dim\ V<\infty$ und
+$\mathcal{B}$ eine Basis. Dann ist die Abbildung $s\mapsto M_\mathcal{B}(s)$
+von den Bilinearformen auf $V$ in $M(n\times n; K)$ bijektiv, und $s$ ist genau
+dann symmetrisch, wenn $M_\mathcal{B}(s)$ symmetrisch ist.
+
+\textbf{Transformationsformel:} Sei $V$ ein endlichdimensionaler Vektorraum mit
+Basen $\mathcal{A,B}$ und sei $T^\mathcal{B}_\mathcal{A}$ die entsprechende
+Transformationsmatrix der Koordinaten. Für jede Bilinearform $s$ auf $V$ gilt
+dann:
+
+\begin{equation*}
+	M_\mathcal{B}(s)=^tT^\mathcal{B}_\mathcal{A}\cdot
+	M_\mathcal{A}(s)T^\mathcal{B}_\mathcal{A}
+\end{equation*}
+
+\textbf{Hinweis:} Hier sei ein struktureller Unterschied zu beobachten denn es gilt:
+\begin{alignat*}{3}
+	&B=^tT^{-1}AT^{-1} &&=^tSAS && \quad\text{ für Bilineaformen}\\
+	&B=TAT^{-1} &&=S^{-1}AS && \quad\text{ für Endomorphismen.}
+\end{alignat*}
+
+\textbf{Definition:} Sei $s$ eine symmetrische Bilinearform $s:V\times V \to K$
+dann ist $q$ die assoziierte quadratische Form mit
+\begin{equation*}
+	q:V\to K,\quad v\mapsto q(v) :=s(v,v)
+\end{equation*}
+Wobei folgende Eigenschaften gelten:
+\begin{alignat*}{1}
+	&q(\lambda v) = \lambda^2q(v)\\
+	&s(v,w)=\frac{1}{2}(q(v+w)-q(v)-q(w))
+\end{alignat*}
+
+\textbf{Diagonalisierungssatz:} Sei $K$ ein Körper mit $char(K)\neq 2$, $V$ ein
+endlichdimensionaler $K$-Vektorraum und $s:V\times V\to K$ eine symmetrische
+Bilinearform. Dann gibt es eine Basis $\mathcal{B}=(v_1,\dots v_n)$ mit
+$s(v_i,v_j)=0$ für $i\neq j$. Ist $q:V\to K$ die zugehörige quadratische Form
+und $\alpha_i:=q(v_i)=s(v_i,v_i)$, so folgt
+\begin{equation*}
+	q(v)=\alpha_1x_1^2+\dots + a_nx_n^2\quad \text{für}
+	v=x_1v_1+\dots+x_nv_n\in V
+\end{equation*}
+Ist $rang(s)=r$, so kann man die Reihenfolge derart wählen dass
+\begin{equation*}
+	\alpha_1\neq 0, \dots,\alpha_r\neq 0\text{ und
+	}\alpha_{r+1}=\dots=\alpha_n=0.
+\end{equation*}
+
+\textbf{Korollar:} Zu einer symmetrischen Matrix $A\in M(n\times n;K)$ mit
+$char(k)\neq 2$ gibt es ein $S\in GL(n;K)$, sodass
+\begin{equation*}
+	^tSAS=\begin{pmatrix}
+		\alpha_1 & & 0\\
+		& \ddots & \\
+		0 & & \alpha_n
+	\end{pmatrix}
+\end{equation*}
+
+\textbf{Lemma:} Für jede symmetrische Bilinearform $s$ und jede Basis
+$\mathcal{B}$ von $V$ ist $rang(s)=rang\ M_\mathcal{B}(s)$.
+
+\textbf{Trägheitsgesetz von Sylvester:} Hat man für eine quadratische Form $q$
+auf einem $\mathbb{R}$-Vektorraum $V$ zwei Zerlegungen $V=V_+\oplus V_-\oplus
+V_0 = V'_+\oplus V'_-\oplus V_0$ mit 
+\begin{alignat*}{1}
+	& q(v)>0\text{ für } 0\neq v\in V_+\text{ und } 0\neq v\in V_+'\text{
+	sowie}\\
+	& q(v)<0\text{ für } 0\neq v\in V_-\text{ und } 0\neq v\in V_-'
+\end{alignat*}
+so folgt
+\begin{equation*}
+	dim\ V_+'=dim\ V_+\text{  und  }dim\ V'_-=dim_-.
+\end{equation*}
+
 
 \textit{\small Woche 10}
 
