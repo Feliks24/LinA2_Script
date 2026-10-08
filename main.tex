@@ -3,8 +3,19 @@
 
 \usepackage{parskip}
 
-\begin{document}
+%copied lines from stix.sty to define \operp
+%symbol for orthogonal direct sum
+\DeclareFontEncoding{LS1}{}{}
+\DeclareFontSubstitution{LS1}{stix}{m}{n}
+\DeclareSymbolFont{symbols2}{LS1}{stixfrak} {m} {n}
+\DeclareMathSymbol{\operp}{\mathbin}{symbols2}{"A8}
 
+%raise cdot a bit so
+%$\cdot\dots don't blend in
+\let\oldcdot\cdot
+\renewcommand{\cdot}{\raisebox{0.1ex}{$\oldcdot$}}
+
+\begin{document}
 
 \newboolean{show_notes}
 
@@ -54,39 +65,39 @@ Das Projekt ist vorzufinden unter
 
 \section{Einführung}
 
-\textit{\small Woche 2}
+\textit{\small \hspace{-1.5cm}Woche 2}
 
 \textbf{Definition:} Eine Menge $R$ zusammen mit zwei Verknüpfungen
 \begin{align*}
-	+:R\times R\to R, (a,b)\mapsto a+b\\
-	\cdot:R\times R \to R, (a,b)\mapsto a\cdot b
+	&+:R\times R\to R, (a,b)\mapsto a+b\\
+	&\cdot:R\times R \to R, (a,b)\mapsto a\cdot b
 \end{align*}
 heißt \textbf{Ring}, wenn folgendes gilt:
+
 \begin{itemize}
 \item[\textbf{R1}] $R$ zusammen mit der Addition $+$ ist eine abelsche Gruppe
 \item[\textbf{R2}] Die Multiplikation $\cdot$ ist assoziativ
 \item[\textbf{R3}] Es gelten das Distributivgesetz
 \end{itemize}
-\vspace{\parskip}
 
 \textbf{Definition:} Ein Ring $R$ ist ein Integritätsring, falls gilt:
 \begin{itemize}
 \item[$i)$] $R$ ist kommutativ mit Einselement $1\neq0$
 \item[$ii)$] $R$ ist nullteilerfrei
 \end{itemize}
-\vspace{\parskip}
 
 \textbf{Anmerkung:} Ein Nullteiler für $a\neq0$ sei ein $b\neq0$, sodass
 $ab=0$. Beispiel:
-
-$\begin{pmatrix}
+\begin{equation*}
+\begin{pmatrix}
 	1 & 0\\
 	0 & 0
 \end{pmatrix}
 \begin{pmatrix}
 	0 & 0\\
 	0 & 1
-\end{pmatrix}=0$
+\end{pmatrix}=0
+\end{equation*}
 
 \textbf{Definition:} Ein Ring $R$ heißt \textbf{nullteilerfrei}, wenn für
 alle $a,b\in R$ aus $a\cdot b=0$ stets $a=0$ oder $b=0$ folgt.
@@ -120,7 +131,7 @@ Homomorphismus.
 \item $\mathbb{C}=\{x+iy: x,y\in\mathbb{R}\}$ wobei $i=\sqrt{-1}$
 \item $\mathbb{C}$ ist ein Körper mit Charakteristik 0
 \item $|x+iy| = \sqrt{x^2 + y^2}$
-\end{itemize}\vspace{\parskip}
+\end{itemize}
 
 \textbf{Wiederholung (gekürzt)} Sei $K$ ein Körper, $t$ eine formale Variable
 und $a_0,\dots,a_n\in K$. Dann nennt man den Ausdruck 
@@ -140,7 +151,7 @@ ohne Nullteiler. Weiter gilt
 Dabei soll formal $n-\infty = -\infty+m= -\infty + (-\infty) = -\infty$ sein
 
 \textbf{Definition: }Sind $a,b\in R$, so heißt $b$ \textbf{Teiler} von $a$
-($b|a$), wenn es ein $c\in R$ gibt mit $a=cb$. 
+(also $b|a$), wenn es ein $c\in R$ gibt mit $a=cb$. 
 
 Ein Element $a\in R$ heißt eine \textbf{Einheit}, wenn es invertierbar ist,
 d.h., wenne es $\tilde{a}\in R$ gibt mit $a\tilde{a}= 1$.
@@ -152,7 +163,10 @@ Ein gemeinsamer Teiler $d$ von $a$ und $b$ heißt ein \textbf{größter
 gemeinsamer Teiler(ggt)}, wenn $c|d$ für jeden gemeinsamen Teiler $c$.
 
 \textbf{Satz:} Sind $f,g\in K[t]$, und ist $g\neq 0$, so gibt es dazu eindeutig
-bestimmte Polynome $q,r\in K[t]$ derart, dass $f=qg+r$ und deg $r$ $<$ deg $g$.
+bestimmte Polynome $q,r\in K[t]$ derart, dass 
+\begin{equation*}
+	f=qg+r\text{ und }deg\ r < deg\ g.
+\end{equation*}
 
 \textbf{Satz:} In den Ringen $R=\mathbb{Z}$ und $R=K[t]$ gibt es zu Elementen
 $a,b\in R$, die nicht beide 0 sind, stes einen größten gemeinsamen Teiler $d\in
@@ -163,16 +177,21 @@ $a,b\in R\backslash \{0\}$ Koeffizienten $x,y\in R$ derart, dass $ggT(a,b) = xa
 +yb$.
 
 \textbf{Lemma:} Ist $\lambda\in K$ eine Nullstelle von $f\in K[t]$, so gibt es
-ein eindeutig bestimmtes Polynom $g\in K[t]$ mit $f=(t-\lambda)g$ und es gilt
-$deg\ g=(deg\ f)-1$.
+ein eindeutig bestimmtes Polynom $g\in K[t]$ mit 
+\begin{equation*}
+	f=(t-\lambda)g\text{ und es gilt } deg\ g=(deg\ f)-1.
+\end{equation*}
 
 \textbf{Korollar 1:} Sei $K$ ein beliebiger Körper, $f\in K[t]$ ein Polynom und
 $k$ die Anzahl der Nullstellen von $f$. Ist $f$ vom Nullpolynom verschieden, so
 gilt $k\leq deg\ f$.
 
 \textbf{Definition:} Ist $f\in K[t]$ vom Nullpolynom verschieden und
-$\lambda\in K$, so heißt $\mu(f;\lambda):=max\{r\in\mathbb{N}: f=(t-\lambda)^rg
-\text{ mit } g\in K[t]\}$ die Vielfachheit der Nullstelle $\lambda$ von $f$.
+$\lambda\in K$, so heißt 
+\begin{equation*}
+\mu(f;\lambda):=max\{r\in\mathbb{N}: f=(t-\lambda)^rg \text{ mit } g\in K[t]\}
+\end{equation*}
+die Vielfachheit der Nullstelle $\lambda$ von $f$.
 
 \textbf{Fundamentalsatz der Algebra:} Jedes Polynom $f\in \mathbb{C}[t]$ mit
 $deg\ f>0$ hat mindestens eine Nullstelle in $\mathbb{C}$.
@@ -183,7 +202,7 @@ mit $n=deg\ f$, sodass $f=a(t-\lambda_1)\cdot\dots \cdot (t-\lambda_n)$.
 
 \section{Eigenwerte \& Eigenräume}
 
-\textit{\small Woche 3}
+\textit{\small \hspace{-1.5cm}Woche 3}
 
 \textbf{Definition:} Sei $F$ ein Endomorphismus des $K$-Vektorraums $V$. Ein
 $\lambda\in K$ heißt Eigenwert von $F$, wenn es ein $v\in V$ mit $v\neq0$ gibt,
@@ -207,7 +226,6 @@ bezüglich $\lambda$.
 \item[e)] Sind $\lambda_1,\lambda_2\in K$ verschieden, so ist
 	$Eig(F;\lambda_1)\cap Eig(F;\lambda_2)=\{0\}$
 \end{itemize}
-\vspace{\parskip}
 
 \textbf{Lemma:} Gegeben seien $F\in End(V)$ und Eigenvektoren $v_1,\dots, v_m$
 zu paarweise verschiedenen Eigenwerten $\lambda_1,\dots, \lambda_m$. Dann sind
@@ -228,7 +246,6 @@ die folgenden Eigenschaften:
 	\item Die Nullstellen von $P_F$ sind die Eigenwerte von F
 	\item Ist $A$ eine Matrix, die $F$ darstellt, so ist $P_F(t)=det(A-t E_n)$
 \end{enumerate}
-\vspace{\parskip}
 
 \textbf{Satz:} Sei $V$ ein endlichdimensionaler $K$-Vektorraum und $F\in
 End(V)$. Dann sind die folgenden Bedingungen äquivalent:
@@ -247,10 +264,12 @@ End(V)$. Dann sind die folgenden Bedingungen äquivalent:
 	Eigenwerte von $F$, so ist $V = Eig(F;\lambda_1)\oplus\dots\oplus
 	Eig(F;\lambda_k)$
 \end{itemize}
-\vspace{\parskip}
 
 \textbf{Definition:} Ein Endomorphismus heißt diagonalisierbar, wenn es eine
-asis aus Eigenvektoren gibt. $A=T^{-1} D T$
+Basis aus Eigenvektoren gibt. 
+\begin{equation*}
+	A=T^{-1} D T
+\end{equation*}
 
 \textbf{Bemerkung:} Ist $dim\ V=n<\infty$, so ist $F\in End(V)$ genau dann
 diagonalisierbar, wenn es eine Basis $\mathcal{B}=(v_1,\dots,v_n)$ von $V$
@@ -281,7 +300,6 @@ wenn folgende Bedingungen erfüllt sind:
 \item[DS2] Sind $w_1\in W_1,\dots,w_k\in W_k$ gegeben mit $w_1+\dots w_k=0$, so
 	folgt $w_1=\dots=w_k=0$
 \end{itemize}
-\vspace{\parskip}
 
 \textbf{Satz:} Für Untervektorräume $W_1,\dots,W_k$ eines endlichdimensionalen
 Vektorraums $V$ sind folgende Bedingungen äquivalent:
@@ -296,8 +314,8 @@ Vektorraums $V$ sind folgende Bedingungen äquivalent:
 
 \item[iii)] $V=W_1+\dots+W_k$ und $dim\ V=dim\ W_1+ \dots+dim\ W_k$
 \end{itemize}
-\vspace{\parskip}
 
+\newpage
 \textbf{Satz:} Sei $V$ ein endlichdimensionaler $K$-Vektorraum und $F\in
 End(V)$. Dann sind die folgenden Bedingungen äquivalent:
 
@@ -315,11 +333,10 @@ End(V)$. Dann sind die folgenden Bedingungen äquivalent:
 	Eig(F;\lambda_k)$
 \end{itemize}
 
-\vspace{\parskip}
 
 \section{Trigonalisierbarkeit}
 
-\textit{\small Woche 4}
+\textit{\small \hspace{-1.5cm}Woche 4}
 
 \textbf{Definion:} Sei $F\to V$ ein Endomorphismus und $W\subset V$ ein
 Untervektorraum. $W$ heißt $F$-invariant, wenn $F(W)\subset W$.
@@ -328,10 +345,14 @@ Untervektorraum. $W$ heißt $F$-invariant, wenn $F(W)\subset W$.
 $P_{F|W}$ ein Teiler von $P_F$.
 
 \textbf{Definition:} Unter einer Fahne $(V_r)$ in einem $n$-dimensionalen
-Vektorraum $V$ versteht man eine Kette $\{0\} =V_0\subset
-V_1\subset\dots\subset V_n=V$ von Untervektorräumen mit $dim\ V_r=r$. Ist $F\in
-End(V)$, so heißt die Fahne $F$-invariant, wenn $F(V_r)\subset V_r$ für alle
-$r\in\{0,\dots,n\}$
+Vektorraum $V$ versteht man eine Kette 
+\begin{equation*}
+\{0\} =V_0\subset
+V_1\subset\dots\subset V_n=V
+\end{equation*}
+
+von Untervektorräumen mit $dim\ V_r=r$. Ist $F\in End(V)$, so heißt die Fahne
+$F$-invariant, wenn $F(V_r)\subset V_r$ für alle $r\in\{0,\dots,n\}$
 
 \textbf{Definition:} Ein Endomorphismus heißt trigonalisierbar, wenn es eine
 obere Dreiecksmatrix als Darstellungsmatrix gibt. Eine Matrix heißt
@@ -344,7 +365,6 @@ trigonalisierbar, wenn sie ähnlich ist zu einer oberen Dreiecksmatrix.
 	obere Dreiecksmatrix ist
 \item[iii)] $F$ ist trigonalisierbar
 \end{itemize}
-\vspace{\parskip}
 
 \textbf{Trigonalisierungssatz:} Für einen Endomorphismus $F$ eines
 $n$-dimensionalen $K$-Vektorraums sind folgende Bedingungen äquivalent:
@@ -361,11 +381,10 @@ $n$-dimensionalen $K$-Vektorraums sind folgende Bedingungen äquivalent:
 Vektorraums ist trigonalisierbar.
 
 \section{Jordan'sche Normalform}
-\textit{\small Woche 5}
+\textit{\small \hspace{-1.5cm}Woche 5}
 
 \textbf{Definition:} Ein Jordan-Block der Größe zum Eigenwerte
 $\lambda$ ist die quadratische $n\times n$-Matrix
-
 \begin{equation*}
 	J_n(\lambda):=
 \begin{pmatrix}
@@ -379,7 +398,6 @@ $\lambda$ ist die quadratische $n\times n$-Matrix
 
 \textbf{Definition:} Eine Jordan-Matrix ist eine Blockdiagonalmatrix mit
 Jordan-Blöcken in der Diagonalen, d.h. eine Matrix der Form
-
 \begin{equation*}
 	\begin{pmatrix}
 		J_{r_1}(\lambda_1) & & & 0\\
@@ -406,7 +424,7 @@ Jordan-Matrizen, wobei jeder Jordan-Block jeweils die Größe $1\times1$ hat.
 
 \textbf{Satz von der Jordanschen Normalform:} Sei $V$ ein endlichdimensionaler
 Vektorraum übre einem algebraisch abgeschlossenen Körper, und sei $F\in
-End(V)$. Dann igbt es eine Basis $\mathcal{B}$ von $V$, bezüglich der die
+End(V)$. Dann gibt es eine Basis $\mathcal{B}$ von $V$, bezüglich der die
 darstellende Matrix $M_\mathcal{B}(F)$ Jordansche Normalform hat. Diese
 Jordan-Matrix $M_\mathcal{B}(F)$ ist bis auf die Reihenfolge der Jordan-Blöcke
 durch den Endomorphismus $F$ eindeutig bestimmt.
@@ -419,7 +437,7 @@ $J$ ist bis auf die Reihenfolge der Jordan-Blöcke durch die Matrix $A$
 eindeutig bestimmt.
 
 \textbf{Satz:} Quadratische Matrizen über einem algebraisch abgeschlossenen
-Körper sind genau dann ähnlich, wenn sie(bis auf die Reihenfolge der
+Körper sind genau dann ähnlich, wenn sie (bis auf die Reihenfolge der
 Jordan-Blöcke) die gleiche Jordansche Normalform haben.
 
 \textbf{Anmerkung:} Ein algebraisch abgeschlossener Köper $K$ ist ein Körper
@@ -436,8 +454,10 @@ aber nicht $\mathbb{R}$
 \end{itemize}
 
 \textbf{Lemma:} Ein Vektor $v\in V$ ist genau dann Hauptvektor der Stufe
-$k\geq1$ zum Eigenwert $\lambda$, wenn $(F-\lambda I_V)^k(v)=0$ aber
-$(F-\lambda I_V)^{k-1}(v)\neq0$.
+$k\geq1$ zum Eigenwert $\lambda$, wenn 
+\begin{equation*}
+(F-\lambda I_V)^k(v)=0\quad\text{aber}\quad(F-\lambda I_V)^{k-1}(v)\neq0.
+\end{equation*}
 
 \textbf{Definition:} Eine Familie $(v_1,\dots, v_k)$ heißt eine Jordan-Kette
 von $F$ zum Eigenwert $\lambda$, wenn $v_k$ ein Hauptvektor der Stufe $k$ ist
@@ -469,7 +489,7 @@ ist zum Eigenwert $\lambda$.
 
 \section{Polynome und Endomorphismen}
 
-\textit{\small Woche 6}
+\textit{\small \hspace{-1.5cm}Woche 6}
 
 \textbf{Definition:} Sei $p=a_0+a_1t+\dots a_dt^d\in K[t]$ und $F\in End(V)$
 dann gilt $p(F):=a_0I_V+a_1F+\dots+a_dF^d\in End(V)$ wobei $F^k=F\circ\dots
@@ -513,7 +533,6 @@ $p(B)=Tp(A)T^{-1}$ ähnlich.
 
 \textbf{Definition:} Die Einsetzungshomomorpihsmen für Elemente $x\in K,F\in
 End(V)$ und $A\in M(n\times n; K)$ sind die Abbildungen
-
 \begin{alignat*}{2}
 	&ev_x:\ K[t] \to K, \quad && ev_x(p) = p(x)\\
 	&ev_F:\ K[t] \to End(V), && ev_F(p) = p(F)\\
@@ -553,6 +572,7 @@ di in $\mathcal{I}$ enthalten ist, oder $m=0$, wenn $\mathcal{I}=\{0\}$.
 \textbf{Satz:} Jedes Ideal $\mathcal{I}$ von $K[t]$ ist entweder das Nullideal
 oder es gibt genau ein normiertes Polynom $m\in K[t]$ mit $\mathcal{I}=mK[t]$.
 
+\newpage
 \textbf{Definition:} Für den Endomorphismus $F\in End(V)$ sei das Ideal
 $\mathcal{I}_F$ nicht das Nullideal. Dann nennt man das eindeutig bestimmte
 normierte Polynom, das das Ideal $\mathcal{I}_F$ erzeugt, das Minimalpolynom
@@ -575,9 +595,12 @@ Polynom. Dann ist $P_F(F)=0\in End(V)$. Für die Matrix $A\in M(n\times n;K)$
 gilt analog $P_A(A)=0\in M(n\times n;K)$.
 
 \textbf{Korollar}: Das Minimalpolynom $M_F$ teilt das charakteristische Polynom
-$P_F$. Insbesondere ist $deg\ M_F\leq deg\ P_F=dim\ V$.
+$P_F$. Insbesondere ist 
+\begin{equation*}
+	deg\ M_F\leq deg\ P_F=dim\ V.
+\end{equation*}
 
-\textit{\small Woche 7}
+\textit{\small \hspace{-1.5cm}Woche 7}
 
 \textbf{Hinweis:} In dieser Woche wird der Beweis der Jordan-Normalform
 angegangen. Da dieses Skript auf Beweise im allgemeinen nicht fokusiert ist,
@@ -605,6 +628,7 @@ V=Ker(F-\lambda_1 I_V)^{n_1}\oplus\dots\oplus Ker(F-\lambda_k I_V)^{n_k}
 \end{equation*}
 der $F$-invarianten Unterräume $Ker(F-\lambda_j I_V)^{n_j}$.
 
+\newpage
 \textbf{Lemma:} Sei $V$ ein endlichdimensionaler Vektorraum über einem
 beliebigen Körper $K$, sei $f\in End(V)$, und sei $q(F)=0$ für ein nicht
 verschwindendes Polynom $q\in K[t]$. Wenn $q$ in zwei teilerfremde Faktoren
@@ -618,8 +642,11 @@ zerfällt also wenn $q=q_1q_2$ mit $ggT(q_1,q_2)=1$ dann gilt
 
 \textbf{Korollar:} Sei $q\in K[t]$ mit $q(F)=0$, und sei $q=q_1\dots q_k$ mit
 paarweise teilerfremden Faktoren $q_j$. Dann sind die Untervektorräume $Ker\
-q_j(K)$ invariant unter $F$ und es gilt $V=Ker\ q_1(F)\oplus\dots\oplus Ker\
-q_k(F)$.
+q_j(K)$ invariant unter $F$ und es gilt 
+\begin{equation*}
+	V=Ker\ q_1(F)\oplus\dots\oplus Ker\ q_k(F).
+\end{equation*}
+
 
 \textbf{Definition:} Man nennt einen Endomorphismus $F\in End(V)$ nilpotent,
 wenn $F^d= F\circ\dots\circ F=0$ für eine positive ganze Zahl $d\neq0$.
@@ -639,26 +666,32 @@ End(V)$ nilpotent, und sei $d$ die kleinste positive Zahl mit $G^d=0$.
 	Jordan-Blöcke $J_m$ eindeutig bestimmt.
 \end{itemize}
 
-\textbf{Hinweis (informell):} Der letze Satz enthält eine Matrixdarstellung,
-die ich wegglasse. Trotz der Darstellung fand ich diesen Satz recht verwirred
+\textbf{Hinweis:} Der letze Satz enthält eine Matrixdarstellung,
+die ich weglasse. Trotz der Darstellung fand ich diesen Satz recht verwirred
 deshalb einmal informell: Einerseits ist bereits impliziert dass alle
 Eigenwerte $0$ sind, das geht aus der nilpotent Eigenschaft hervor wird aber
 hier nicht explizit erwähnt. $s_m$ Ist die Anzahl von $J_m$ also die Anzahl der
 Jordan-Blöcke mit größe $m$. Dabei besagt i) dass $s_d\geq 1$ und ii) gibt eine
-Aussage über die eindeutigkeit.
+Aussage über die Eindeutigkeit.
 
 \section{Bilinearformen und Skalarprodukte}
 
-\textit{\small Woche 8}
+\textit{\small \hspace{-1.5cm}Woche 8}
 
 \textbf{Hinweis:} Diese Woche befasst sich mit einer Wiederholung, dessen
-Inhalt bereits aus Lina1 und Anfang Ana2 hervor gehen. Interessanter wird es ab
-nächste Woche.
+Inhalt bereits aus LinA1 und Anfang Ana2 hervor gehen. Interessanter wird es ab
+nächste Woche. Mehrere Definition werden sich auch später in einem erweitertem
+Kontext wiederholen.
 
-\textbf{Definition:} Das kanonische Skalarprodukt entspricht einer Abbildung
-folgender Form $\langle\cdot,\cdot\rangle: \mathbb{R}^n \times
-\mathbb{R}^n\to\mathbb{R}, (x,y)\mapsto\langle x,y\rangle$. Sind
-$x,y\in\mathbb{R}^n$ Spaltenvektoren so ist $\langle x,y\rangle = x^t\cdot y$.
+\newpage
+\textbf{Definition:} Das kanonische Skalarprodukt (in $\mathbb{R}$) entspricht
+einer Abbildung folgender Form 
+\begin{equation*}
+\langle\cdot,\cdot\rangle: \mathbb{R}^n \times
+\mathbb{R}^n\to\mathbb{R}, (x,y)\mapsto\langle x,y\rangle.
+\end{equation*}
+Sind $x,y\in\mathbb{R}^n$ Spaltenvektoren so ist $\langle x,y\rangle = {^tx}\cdot
+y$.
 
 \textbf{Beispiel}: Sei $A,B\in M(n\times n,K)$ und $C=A\cdot B$, sei $a_i$ der
 $i$-te Zeilenvektor von $A$, $b_j$ der $j$-te Spaltenvektor von $B$, $c_{i,j}$
@@ -687,7 +720,7 @@ x,x\rangle}
 
 \textbf{Definition:} Die folgende Metrik sei \textit{eine} (induzierte) Metrik:
 \begin{equation*}
-	d:\mathbb{R}^n\times \mathbb{R}^n\to R_+, d(x,y):=||y-x||.
+	d:\mathbb{R}^n\times \mathbb{R}^n\to R_+,\quad d(x,y):=||y-x||.
 \end{equation*}
 
 \textbf{Hinweis:} Hier ist besonders betont, dass die Metrik und Norm die
@@ -696,10 +729,9 @@ Skalarprodukt induziert ist und parallel die gegeben Metrik von der vorherigen
 Norm induziert ist. Sei das Skalarprodukt entsprechend das kanonische so ist
 die induzierte Norm auch bekannt als die Euklidische Norm und die induzierte
 Metrik der Euklidische Abstand. Die folgenden Eigenschaften gelten allerdings
-für alle Normen und Metriken. Später impliziert Cauchy-Schwarz allerdings, dass
-die Norm von einem Skalarprodukt induziert ist und weiterhin gilt dies dann
-auch für alle Normen assoziert mit einem Skalarprodukt, ob kanonisch oder
-nicht.
+für alle Normen und Metriken. Später bei Cauchy-Schwarz sehen wir ein
+Verhältnis zwischen Skalarprodukt und deren assozierte Norm was nicht dringend
+vorraussetz dass das gegeben Skalarprodukt kanonisch sein muss.
 
 \textbf{Beobachtung:} Die wichtigsten Eigenschaften von Norm und Abstand sind
 die folgenden
@@ -723,15 +755,20 @@ Sind $x,y$ linear abhängig dann gilt:
 
 \textbf{Definition:} Zwei Vektoren $x,y\in\mathbb{R}^n$ heißen
 orthogonal$(\perp)$ wenn $\langle x,y\rangle=0$. Sind $x,y\neq 0$, so gilt
-offenbar $x\perp y\iff\measuredangle(x,y)=\frac{\pi}{2}$.
+offenbar 
+\begin{equation*}
+x\perp y\iff\measuredangle(x,y)=\frac{\pi}{2}.
+\end{equation*}
 
 \textbf{Definition:} Die Definition für den Winkel kann man auch in folgender
-Form schreiben $\langle x,y\rangle=||x||\cdot||y||\cdot
-cos\measuredangle(x,y)$.
-
-Diese formel erlaubt eine geometrische Erklärung des Skalarprodukts als Produkt
-von $||x||$ und $||y||\cdot cos\measuredangle(x,y)$, wobei der zweiter Faktor
-gleich der senkrechten Projection des Vektors $y$ auf die durch $x$
+Form schreiben 
+\begin{equation*}
+\langle x,y\rangle=||x||\cdot||y||\cdot
+cos\measuredangle(x,y).
+\end{equation*}
+Diese Formel erlaubt eine geometrische Erklärung des Skalarprodukts als Produkt
+von $||x||$ und $||y||\cdot cos\measuredangle(x,y)$, wobei der zweite Faktor
+gleich der senkrechten Projektion des Vektors $y$ auf die durch $x$
 aufgespannte Gerade ist.
 
 \textbf{Definition:} Das Vektorprodukt für $n=3$ definiert sich wie folgt:
@@ -746,7 +783,6 @@ aufgespannte Gerade ist.
 		y_1 & y_2 & y_3
 	\end{pmatrix}}
 \end{alignat*}
-
 Für das Vektorprodukt, $x,x',y,y'\in\mathbb{R}^3$ und $\lambda\in\mathbb{R}$
 gelten folgende grundlegende Rechenregeln:
 \begin{alignat*}{2}
@@ -786,21 +822,18 @@ Das Produkt $\langle x\times y,z\rangle$ wird auch Spatprodukt genannt.
 \textbf{Definition:} Zu einer komplexen Zahl $z=x+iy$ ist definiert
 $\bar{z}=x-iy$ und $|z|=\sqrt{z\bar{z}} =\sqrt{x^2+y^2}$. 
 
-Die Zahl $z\in\mathbb{C}$ entspricht der Vektor $(x,y\in\mathbb{R}^2$, und mit
+Die Zahl $z\in\mathbb{C}$ entspricht der Vektor $(x,y)\in\mathbb{R}^2$, und mit
 der euklidischen Norm gilt dann $|z|=||(x,y)||$.
 
 Für die Geometrie des $\mathbb{C}^n$ ist die folgende Abbildung entsprechend
 dem kanonischen Skalarprodukt:
-
 \begin{alignat*}{2}
 	&\mathbb{C}^2\times \mathbb{C}^2\to\mathbb{C}\quad, &&
 	(z,w)\mapsto\langle z,w\rangle\rangle_c\\
 	&\langle z,w\rangle_c:=z_1\bar{w}_1+\dots+z_n\bar{w}_n
 \end{alignat*}
-
 Für das kanonische Skalarprodukt in $\mathbb{C}$ mit $z,z',w,w'\in\mathbb{C}^n$
 und $\lambda\in\mathbb{C}$ gelten folgende Rechenreglen:
-
 \begin{alignat*}{2}
 	1.&\langle z+z',w\rangle = \langle z,w\rangle + \langle
 	z',w\rangle,\quad&&
@@ -812,7 +845,6 @@ und $\lambda\in\mathbb{C}$ gelten folgende Rechenreglen:
 	z,z\rangle
 	=0\iff z=0}
 \end{alignat*}
-
 \textbf{Hinweis:} Der Index $c$ wird vorübergehend angehängt um auf den
 Unterschied zum Skalarprodukt im $\mathbb{R}^n$ hinzuweisen. Zu bemerken ist,
 dass das hier definierte kanonische Skalarprodukt angewendet auf reele Zahlen
@@ -821,7 +853,13 @@ oft Verwirrung, den in $\mathbb{R}$ behandelt man das Skalarprodukt als
 bilinear, also linear in beiden Argumenten, allerdings ist es im allgemeinen
 nicht bilinear!
 
-\textit{\small Woche 9}
+Weiterhin können unterschiedliche Quellen verschiedene Konventionen haben was
+es Reihenfolge betrifft. Beispielsweise wird in mindestens
+\href{https://de.wikipedia.org/wiki/Gram-Schmidtsches_Orthogonalisierungsverfahren
+}{einem Wikipedia Artikel} angemerkt, dass das Skalarprodukt benutzt wird
+welches semilinear im ersten und linear im zweiten ist.
+
+\textit{\small \hspace{-1.5cm}Woche 9}
 
 \textbf{Bilinearform:} 
 \begin{alignat*}{2}
@@ -830,7 +868,6 @@ nicht bilinear!
 	s(v,w),\\
 	B2\quad&s(v,w+w')=s(v,w)+s(v,w'),&& s(v,\lambda w)=\lambda s(v,w).
 \end{alignat*}
-
 Weiterhin kann man Bilinearform wie folgt kategorisieren entsprechend der
 jeweiligen Eigenschaft
 \begin{alignat*}{2}
@@ -842,9 +879,8 @@ jeweiligen Eigenschaft
 $\mathcal{B},\Phi_\mathcal{B}:K^n\to V$ das zugehörige Koordinatensystem. Wir
 betrachten die Matrix $A=M_\mathcal{B}(s)$ und für $v,w\in V$ die Koordinaten
 $x=\Phi_\mathcal{B}^{-1}(v),y=\Phi_\mathcal{B}^{-1}(w)$. Dann ist
-
 \begin{equation*}
-	s(v,w)=x^TAy=(x_1,\dots,x_n)
+	s(v,w)={^tx}Ay=(x_1,\dots,x_n)
 	\begin{pmatrix}
 		a_{1,1}&\dots &a_{1,n}\\
 		\vdots & & \vdots\\
@@ -854,7 +890,6 @@ $x=\Phi_\mathcal{B}^{-1}(v),y=\Phi_\mathcal{B}^{-1}(w)$. Dann ist
 		y_1\\ \vdots\\ y_n
 	\end{pmatrix}
 \end{equation*}
-
 Weiterhin hat $A$ folgende Form
 \begin{equation*}
 	A=M_\mathcal{B}(s)=(s(v_i,v_j))_{i,j}\in M(n\times n;K)
@@ -869,15 +904,14 @@ dann symmetrisch, wenn $M_\mathcal{B}(s)$ symmetrisch ist.
 Basen $\mathcal{A,B}$ und sei $T^\mathcal{B}_\mathcal{A}$ die entsprechende
 Transformationsmatrix der Koordinaten. Für jede Bilinearform $s$ auf $V$ gilt
 dann:
-
 \begin{equation*}
-	M_\mathcal{B}(s)=^tT^\mathcal{B}_\mathcal{A}\cdot
+	M_\mathcal{B}(s)={^tT^\mathcal{B}_\mathcal{A}}\cdot
 	M_\mathcal{A}(s)T^\mathcal{B}_\mathcal{A}
 \end{equation*}
 
 \textbf{Hinweis:} Hier sei ein struktureller Unterschied zu beobachten denn es gilt:
 \begin{alignat*}{3}
-	&B=^tT^{-1}AT^{-1} &&=^tSAS && \quad\text{ für Bilineaformen}\\
+	&B= {^tT}^{-1}AT^{-1} &&= {^tS}AS && \quad\text{ für Bilineaformen}\\
 	&B=TAT^{-1} &&=S^{-1}AS && \quad\text{ für Endomorphismen.}
 \end{alignat*}
 
@@ -892,6 +926,7 @@ Wobei folgende Eigenschaften gelten:
 	&s(v,w)=\frac{1}{2}(q(v+w)-q(v)-q(w))
 \end{alignat*}
 
+\newpage
 \textbf{Diagonalisierungssatz:} Sei $K$ ein Körper mit $char(K)\neq 2$, $V$ ein
 endlichdimensionaler $K$-Vektorraum und $s:V\times V\to K$ eine symmetrische
 Bilinearform. Dann gibt es eine Basis $\mathcal{B}=(v_1,\dots v_n)$ mit
@@ -910,7 +945,7 @@ Ist $rang(s)=r$, so kann man die Reihenfolge derart wählen dass
 \textbf{Korollar:} Zu einer symmetrischen Matrix $A\in M(n\times n;K)$ mit
 $char(k)\neq 2$ gibt es ein $S\in GL(n;K)$, sodass
 \begin{equation*}
-	^tSAS=\begin{pmatrix}
+	{^tS}AS=\begin{pmatrix}
 		\alpha_1 & & 0\\
 		& \ddots & \\
 		0 & & \alpha_n
@@ -933,12 +968,423 @@ so folgt
 	dim\ V_+'=dim\ V_+\text{  und  }dim\ V'_-=dim_-.
 \end{equation*}
 
+\textit{\small \hspace{-1.5cm}Woche 10}
 
-\textit{\small Woche 10}
+\textbf{Definition:} Gegeben sei der Körper $\mathbb{C}$ und der komplexe
+Vektorraum $V$ mit $v,v',w,w',\lambda\in\mathbb{C}$ so sei die Semilinearform
+definiert als Abbildung:
+\begin{alignat*}{1}
+	&\varphi:V\to\mathbb{C},\\
+	&\varphi(v+v')=\varphi(v)+\varphi(v'),\\
+	&\varphi(\lambda v)=\bar\lambda\varphi(v)
+\end{alignat*}
+und Sesquilinearform als Abbildung:
+\begin{alignat*}{2}
+	B1\quad&s(v+v',w)=s(v,w)+s(v',w),&&\quad s(\lambda v,w)=\lambda
+	s(v,w),\\
+	\overline{B2}\quad&s(v,w+w')=s(v,w)+s(v,w'),&&\quad s(v,\lambda
+	w)=\bar\lambda s(v,w),\\
+\end{alignat*}
+weiterhin gilt eine Sesqiulinearform als hermitesch wenn gilt:
+\begin{equation*}
+	H\quad s(v,w)=\overline{s(w,v)}
+\end{equation*}
 
-\textit{\small Woche 11}
+\textbf{Definition:} Sei $\mathbb{K}\in\{\mathbb{R,C}\}$, und $V$ ein
+$\mathbb{K}$-Vektorraum. Eine symmetrische Bilinearform/hermitesche
+Sesquilnearform $s:V\times V\to K$ ist dann positiv definit, wenn $s(v,v)>0$
+für jedes $v\in V,v\neq 0$. 
 
-\textit{\small Woche 12}
+Sei $A\in M(n\times n,\mathbb{K})$ symmetrisch/hermitesch so heißt $A$ positiv
+definit, wenn ${^tx}A\bar x>0$ für jeden Spaltenvektor $x\neq0$ aus $K^n$.
+
+\textbf{Hinweis:} Aus dieser Definition lässt sich positiv semidefinit, negativ
+definit, negativ semidefinit und indefinit leicht definieren, was hier nicht
+weiter aufgeführt wird.
+
+\textbf{Hauptminoren-Kriterium für Definitheit:} Sei $A\in M(n\times
+n;\mathbb{R})$ eine symmetrische Matrix. Dann gilt:
+\begin{equation*}
+	A\text{ ist positiv definit} \iff \forall k=1,\dots,n: det\ A_k>0 
+\end{equation*}
+
+\textbf{Hinweis:} informell ist hier $A_k$ gemeint als die oberste linkeste
+Matrix mit größe $k\times k$ von $A$.
+
+\textbf{Satz:} Für eine symmetrische bzw. hermitesche Matrix $A\in M(n\times n;
+\mathbb{K})$ sind folgende Bedingungen gleichwertig:
+\begin{itemize}
+\item[i)] $A$ ist positiv definit.
+\item[ii)] Alle Eigenwerte $\lambda_1,\dots, \lambda_n\in\mathbb{R}$ von $A$
+	sind positiv.
+\end{itemize}
+
+\textbf{Definition:} Gegeben sei ein Körper $\mathbb{K}\in\{\mathbb{R,C}\}$ und
+$\mathbb{K}$-Vektorraum $V$. Ein Skalarprodukt ist eine positiv definite
+symmetrische Bilinearform für $\mathbb{K}=\mathbb{R}$ bzw. eine positiv
+definite hermitesche Sesquilinearform für $\mathbb{K}=\mathbb{C}$. 
+
+Ein $\mathbb{R}$-Vektorraum/$\mathbb{C}$-Vektorraum mit einem Skalarprodukt
+heißt euklidisch/unitär.
+
+\textbf{Hinweis:} Wir schreiben dann meistens $\langle v,w\rangle$ statt
+$s(v,w)$.
+
+\textbf{Beobachtung:} Die Abbildung 
+\begin{equation*}
+||\cdot||:V\to\mathbb{R},\quad ||v||=\sqrt{\langle v,v\rangle}
+\end{equation*}
+ist eine Norm und ferner $d(v,w):=||w-v||$ eine (induzierte) Metrik.
+
+\textbf{Ungleichung von Cauchy-Schwarz:} Ist $V$ ein euklidischer bzw. unitärer
+Vektorraum und $||\cdot||$ induziert aus $\langle\cdot,\cdot\rangle$ so gilt
+für alle $v,w\in V$
+\begin{equation*}
+	|\langle v,w\rangle|\leq||v||\cdot||w||,
+\end{equation*}
+und die Gleichheit gilt genau dann, wenn $v$ und $w$ linear abhängig sind.
+
+\newpage
+\textbf{Definition:} Sie $V$ ein euklidischer bzw. unitärer Vektorraum
+
+a) Zwei Vektoren $v,w\in V$ heißen orthogonal ($v\perp w$) genau dann wenn
+$\langle v,w\rangle=0$.
+
+b) Zwei Untervektorräume $U,W\subset V$ heißen orthogonal ($U\perp W$) genau
+dann wenn $\forall u\in U,w\in W:\ u\perp w$.
+
+c) Ist $U\subset V$ ein Untervektorraum, so ist sein orthogonales Komplement
+wieder ein Untervektorraum von $V$ und definiert als $U^\perp:=\{v\in V:v\perp
+u,\quad \forall u\in U\}$.
+
+d) Eine Familie $(v_1,\dots,v_n)$ in $V$ heißt orthogonal, wenn $v_i\perp v_j$
+für alle $i\neq j$.
+
+Sie heißt orthonormal, falls zusätzlich $||v_i||=1$,
+
+und Orthonormalbasis, falls sie auch eine Basis ist, d.h. eine Basis
+mit $\langle v_i,v_j\rangle=\delta_{ij}$.
+
+e) Ist $V=V_1\oplus\dots\oplus V_k$, so heißt die direkte Summe orthogonal
+($V=V_1\operp\dots\operp V_k$) falls $V_i\perp V_j$ für alle $i\neq j$
+
+\textbf{Orthonormalisierungssatz:} Sei $V$ ein endlichdimensionaler
+euklidischer bzw. unitärer Vektorraum und $W\subset V$ ein Untervektorraum mit
+Orthonormalbasis $(w_1,\dots, w_m)$. Dann gibt es eine Ergänzung zu einer
+Orthonormalbasis $(w_1,\dots,w_m, w_{m+1},\dots,w_n)$ von $V$.
+
+\textbf{Korollar 1:} Jeder endlichdimensionale euklidische bzw. unitäre
+Vektorraum besitzt eine Orthonormalbasis.
+
+\textbf{Korollar 2:} Ist $W$ Untervektorraum eines endlichdimensionalen
+euklidischen bzw. unitären Vektorraums $V$, so gilt $V=W\operp W^\perp$ und
+$dim\ V=dim\ W+dim\ W^\perp$.
+
+\textbf{Gram-Schmidt-Orthogonalisierungsverfahren:} Sei gegeben eine Menge an
+linear unabhängigen Vektoren $w_1,\dots,w_n$, so berechnet dieser Algorithmus
+eine Orthonormalbasis die den selben Untervektorraum erzeugt.
+
+\begin{enumerate}
+	\item $v_1=\frac{w_1}{||w_1||}$
+	\item $v'_i = w_i - \sum^{n-1} \langle w_i,v_j\rangle v_j$ 
+	\item $v_i = \dfrac{v'_i}{||v'_i||}$
+	\item $(v_1,\dots, v_n)$ ist dann eine Orthonormalbasis
+\end{enumerate}
+
+\textbf{Hinweis:} In der Vorlesung ist dieses Verfahren nicht explizit
+beschrieben und im der Literatur nur impliziert durch den Beweis des
+Orthonormalisierungssatzes. In weiteren Quellen lassen sich zwei Varianten
+finden, jeweils Orthogonalisierung und Orthonormalisierung. Zusätzlich ist
+verwirrend, dass Gram-Schmidtsche Orthogonalisierungsverfahren beschrieben wird
+als ein Verfahren zu finden einer Orthonormalbasis. Je nach einer oder anderen
+Variante normalisiert man an verschiedenen Stellen und erhält möglicherweise
+als Ergebnis nicht normalisierte Vektoren im gegensatz zu dem hier aufgeführtem
+Verfahren.
+
+\textbf{Definition:} Die Gramsche Determinante sei definiert als
+\begin{equation*}
+	G(v_1,\dots,v_m)=det
+	\begin{pmatrix}
+		\langle v_1, v_1\rangle&\dots & \langle v_1, v_m\rangle \\
+		\vdots & \ddots & \vdots\\
+		\langle v_m, v_1\rangle&\dots &\langle v_m, v_m\rangle
+	\end{pmatrix}
+\end{equation*}
+
+\textbf{Lemma:} Für $m\leq n$ und $v_1,\dots,v_m\in\mathbb{R}^n$ ist
+$G(v_1,\dots,v_m)\geq 0$ und
+\begin{equation*}
+ G(v_1,\dots,v_m)=0\iff(v_1,\dots,v_m) \text{  linear abhängig.}
+\end{equation*}
+
+\textbf{Satz:} Für $m\leq n$ und linear unabhängige Vektoren $v_1,\dots,
+v_m\in\mathbb{R}^n$ ist
+\begin{equation*}
+	I_m(P(v_1,\dots, v_m))=\sqrt{G(v_1,\dots, v_m)}
+\end{equation*}
+
+\textbf{Ungleichung von Hadamard:} Seien $v_1,\dots, v_m$ beliebige Vektoren im
+$\mathbb{R}^n$ mit $m\leq n$. Dann ist 
+\begin{equation*}
+	I_m(P(v_1,\dots, v_m))\leq ||v_1||\cdot\dots\cdot||v_m||,
+\end{equation*}
+und Gleichheit besteht genau dann, wenn die $v_i$ paarweise orthogonal sind,
+d.h. wenn $P(v_1,\dots,v_m)$ ein Quader ist.
+
+\textit{\small \hspace{-1.5cm}Woche 11}
+
+
+\textbf{Definition:} Sei $V$ ein euklidischer bzw. unitärer Vektorraum und $F$
+ein Endomorphismus von $V$. Dann heißt $F$ orthogonal bzw. unitär wenn
+\begin{equation*}
+	\langle F(v),F(w)\rangle = \langle v,w\rangle
+\end{equation*}
+
+\textbf{Bemerkung:} ein orthogonales bzw. unitäres $F\in End(V)$ hat folgende
+weiter Eigenschaft:
+
+\begin{itemize}
+\item[a)] $||F(v)||=||v||$ für alle $v\in V$.
+\item[b)] $v\perp w\implies F(v)\perp F(w)$.
+\item[c)] $F$ ist Isomorphismus und $F^{-1}$ ist orthogonal bzw. unitär
+\item[d)] Ist $\lambda\in\mathbb{K}$ Eigenwert von $F$, so ist $|\lambda|=1$.
+\end{itemize}
+
+\textbf{Lemma:} Ist $F\in End(V)$ mit $||F(v)||=||v||$ für alle $v\in V$, so
+ist $F$ orthogonal bzw. unitär.
+
+\textbf{Definition:} Eine Matrix $A\in GL(n;\mathbb{R}$ heißt orthogonal, falls
+$A^{-1}={^tA}$, und entsprechend heißt $A\in GL(n;\mathbb{C})$ unitär, falls
+$A^{-1}=\overline{^tA}$
+
+\newpage
+\textbf{Bemerkung:} Für $A\in M(n\times n;\mathbb{K})$ sind folgende
+Bedingungen gleichwertig:
+\begin{itemize}
+\item[i)] $A$ ist orthogonal bzw. unitär.
+\item[ii)] Die Spalten von $A$ sind eine Orthonormalbasis von $\mathbb{K}^n$.
+\item[iii)] Die Zeilen von $A$ sind eine Orthonormalbasis von $\mathbb{K}^n$.
+\end{itemize}
+
+\textbf{Definition:}
+\begin{alignat*}{2}
+	&O(n):=\{A\in GL(n;\mathbb{R}):A^{-1}={^tA}\},\quad && \text{(orthogonale
+	Gruppe)}\\
+	&SO(n):=\{A\in O(n):det\ A=1\},\quad && \text{(spezielle orthogonale
+	Gruppe)}\\
+	&U(n):=\{A\in GL(n;\mathbb{C}):A^{-1}=\overline{^tA}\},\quad &&
+	\text{(unitäre Gruppe)}\\
+	&SU(n):=\{A\in U(n):det\ A=1\},\quad && \text{(spezielle unitäre
+	Gruppe)}\\
+\end{alignat*}
+
+\textbf{Satz:} Sei $V$ ein euklidischer bzw. unitärer Vektorraum mit einer
+Orthonormalbasis $\mathcal{B}$ und $F$ ein Endomorphismus von $V$. Dann gilt
+\begin{equation*}
+	F\text{ orthogonal (bzw. unitär)}\iff M_\mathcal{B}(F)\text{ orthogonal
+	(bzw. unitär).}
+\end{equation*}
+
+\textbf{Diagonalisierungssatz:} Jeder unitäre Endomorphismus $F$ eines unitären
+Vektorraums besitzt eine Orthonormalbasis aus Eigenvektoren von $F$.
+Insbesondere ist er diagonalisierbar.
+
+\textbf{Korollar:} Zu $A\in U(n)$ gibt es ein $S\in U(n)$ mit
+\begin{equation*}
+	{^t\bar S}\cdot A\cdot S=
+	\begin{pmatrix}
+		\lambda_1 & & 0\\
+		& \ddots &\\
+		0 & & \lambda_n
+	\end{pmatrix}
+\end{equation*}
+wobei $\lambda_i\in\mathbb{C}$ mit $|\lambda_i|=1$ für $i=1,\dots,n$.
+
+\textbf{Satz:} Ist $F$ ein orthogonaler Endomorphismus eines euklidischen
+Vektorraums $V$, so gibt es in $V$ eine Orthonormalbasis $\mathcal{B}$ derart,
+dass
+\begin{equation*}
+	M_\mathcal{B}(F)=
+	\begin{pmatrix}
+		1\\
+		& \ddots&&&&&&0\\
+		&& 1\\
+		&&& -1\\
+		&&&& \ddots\\
+		&&&&& -1\\
+		&&&&&& A_1\\
+		&0&&&&&& \ddots\\
+		&&&&&&&& A_k
+	\end{pmatrix}
+\end{equation*}
+wobei für $j=1,\dots,k$
+\begin{equation*}
+	A_j=
+	\begin{pmatrix}
+		cos(\vartheta_j) & -sin(\vartheta_j)\\
+		sin(\vartheta_j) & cos(\vartheta_j)\\
+	\end{pmatrix}\in SO(2)\quad
+	\text{mit}\quad\vartheta_j\in[0,2\pi[,
+	\text{aber}\vartheta_j\neq0,\pi.
+\end{equation*}
+
+\textbf{Lemma:} Zu einem orthogonalen Endomorphismus $F$ eines euklidischen
+Vektorraums $V$ mit $dim\ V\geq1$ gibt es stets einen Untervektorraum $W\subset
+V$ mit
+\begin{equation*}
+	F(W)\subset W\quad\text{und}\quad1\leq dim\ W\leq2.
+\end{equation*}
+
+\textit{\small \hspace{-1.5cm}Woche 12}
+
+\textbf{Lemma:} Sei $V$ ein endlichdimensionaler euklidischer bzw. unitärer
+$\mathbb{K}$-Vektorraum und $F:V\to V$ ein Endomorphismus. Dann gibt es genau
+einen Endomorphismus
+\begin{equation*}
+	F^{ad}:V\to V\quad\text{mit}\quad \langle F(v),w\rangle=\langle
+	v,F^{ad}(w)\rangle\quad \text{für alle } v,w\in V.
+\end{equation*}
+Ist $\mathcal{B}$ eine Orthonormalbasis von $V$ und $A:=M_\mathcal{B}(F)$, so
+ist $M_\mathcal{B}(F^{ad})={^t\bar A}$. Dabei heißt $F^{ad}$ der zu $F$
+adjungierte Endomorphismus.
+
+\textbf{Definition:} Ist $V$ ein euklidischer oder unitärer Vektorraum, so
+heißt ein Endomorphismus $F$ von $V$ \textbf{normal}, wenn
+\begin{equation*}
+	F\circ F^{ad}=F^{ad}\circ F
+\end{equation*}
+Ist $A=M_\mathcal{B}(F)$ mit einer Orthonormalbasis $\mathcal{B}$ von $V$, so
+bedeutet das
+\begin{equation*}
+	A\cdot {^t\bar A}= {^t\bar A}\cdot A.
+\end{equation*}
+
+\textbf{Beispiel:}
+\begin{itemize}
+\item alle unitären Endomorphismen: hier gilt ${^t\bar A=A^{-1}}$, also
+	$A\cdot{^t\bar A}= E = {^t\bar A}\cdot A$
+\item alle hermiteschen Endomorphismen: hier gilt ${^t\bar A=A^{-1}}$, also
+	$A\cdot{^t\bar A}= A^2 = {^t\bar A}\cdot A$
+\end{itemize}
+
+\textbf{Lemma:} Sei $V$ ein euklidischer bzw. unitärer Vektorraum und $F:V\to
+V$ ein Endomorphismus. Dann gilt
+\begin{itemize}
+\item[1)] $F$ normal $\iff\ \langle F^{ad}(v),F^{ad}(w)\rangle=\langle
+	F(v),F(w)\rangle$ für alle $v,w\in V$.
+\item[2)] $F$ normal $\implies\forall v\in V:||F^{ad}(v)||=||F(v)||$ und $Ker\
+	F^{ad}=Ker\ F$.
+\item[3)] Ist $F$ normal, so ist $G:=F-\lambda I_V$ für alle
+	$\lambda\in\mathbb{K}$ normal.
+\item[4)] Für alle $v\in V$ und $\lambda\in\mathbb{K}$ gilt $F(v)=\lambda v\iff
+	F^{ad}(v)=\bar\lambda v$.
+\end{itemize}
+
+\newpage
+\textbf{Diagonalisierungssatz:} Für einen Endomorphismus $F$ eines unitären
+Vektorraums $V$ sind folgende Eigenschaften gleichwertig:
+\begin{itemize}
+\item[i)] $F$ ist normal
+\item[ii)] Es gibt eine Orthonormalbasis $\mathcal{B}$ von $V$ bestehend aus
+	Eigenvektoren von $F$.
+\end{itemize}
+
+\textbf{Definition:} Ein Endomorphismus $F$ eines endlichdimensionalen
+euklidischen bzw. unitären Vektorraums $V$ heißt \textbf{selbstadjungiert},
+wenn $F=F^{ad}$, d.h.
+\begin{equation*}
+	\langle F(v),w\rangle=\langle v, F(w)\rangle\quad\text{für alle }
+	v,w\in V
+\end{equation*}
+
+\textbf{Bemerkung:} Ist $F\in End(V)$ und $\mathcal{B}$ eine Orthonormalbasis
+von $V$, so gilt $F$ selbstadjungiert $\iff$ $M_\mathcal{B}(F)$ ist symmetrisch
+bzw. hermitesch, d.h. $A={^t\bar A}$.
+
+\textbf{Lemma:} Sei $V$ ein euklidischer bzw. unitärer $\mathbb{K}$-Vektorraum
+und $F:V\to V$ selbstadjungiert. Dann gilt:
+\begin{itemize}
+\item[i)] Alle Eigenwerte von $F$ sind reell.
+\item[ii)] $P_F$ hat auch für $\mathbb{K=C}$ reelle Koeffizienten.
+\item[iii)] $P_F$ zerfällt in Linearfaktoren in $\mathbb{R}[t]$.
+\end{itemize}
+
+\textbf{Diagonalisierungssatz:} Ist $F$ ein selbstadjungierter Endomorphismus
+auf einem euklidischen bzw. unitären Vektorraum $V$, so gibt es eine
+Orthonormalbasis von $V$, die aus Eigenvektoren von $F$ zu reellen Eigenwerten
+besteht.
+
+\textbf{Korollar:} Ist $A\in M(n\times n;\mathbb{K})$ eine symmetrische bzw.
+hermitesche Matrix so gibt es eine orthogonale bzw. unitäre Matrix $S$, sodass
+\begin{equation*}
+	^t\bar SAS=
+\begin{pmatrix}
+	\lambda_1&&0\\
+	&\ddots&\\
+	0&&\lambda_n\\
+\end{pmatrix}
+	\quad\text{mit } \lambda_1,\dots,\lambda_n\in\mathbb{R}.
+\end{equation*}
+
+\textbf{Informell:} 
+\begin{itemize}
+\item[] unitär $\subset$ normal $\subset$ Endomorphismen
+\item[] selbstadjungiert $\subset$ normal $\subset$ Endomorphismen
+\item[] unitär $\cap$ selbstadjungiert $\neq \varnothing$
+\end{itemize}
+
+\textbf{Korollar:} Sind $\lambda_1,\dots,\lambda_k$ die verschiedenen Eigenwerte
+eines selbstadjungierten oder unitären Endomorphismus $F$ von $V$, so ist
+\begin{equation*}
+	V=Eig(F;\lambda_1)\operp\dots\operp Eig(F;\lambda_k).
+\end{equation*}
+
+\textbf{Satz:} Für eine symmetrische bzw. hermitesche Matrix $A\in M(n\times
+n;\mathbb{K})$ sind folgende Bedingungen gleichwertig:
+\begin{itemize}
+\item[i)] $A$ ist positiv definit.
+\item[ii)] Alle Eigenwerte $\lambda_1,\dots,\lambda_n\in\mathbb{R}$ von $A$
+	sind positiv.
+\end{itemize}
+
+\textbf{Korollar:} Ist $A\in M(n\times n;\mathbb{K}$ symmetrisch bzw.
+hermitesch und
+\begin{equation*}
+P_A=(-1)^nt^n+\alpha_{n-1}t^{n-1}+\dots+\alpha_1t+\alpha_0\in\mathbb{R}[t]
+\end{equation*}
+das charakteristische Polynom, so gilt:
+\begin{equation*}
+	A\text{ positiv definit}  \iff \left\{ 
+\begin{aligned}
+    \alpha_j>0& \quad \text{für $j$ gerade} \\
+    \alpha_j<0& \quad \text{für $j$ ungerade.}
+\end{aligned}
+\right.
+\end{equation*}
+Insbesondere muss $\alpha_0=det\ A$ positiv sein.
+
+\textbf{Beobachtung:} Zusammengefasst sind folgende Kriterien equivalent
+\begin{itemize}
+\item[i)] $A\in M(n\times n,\mathbb{K})$ ist positiv definit
+\item[ii)] ${^tx}A\bar x>0\quad\forall x\in\mathbb{K}^n\backslash\{0\}$.
+\item[iii)] $det\ A_k>0$ für $k=1,\dots,n$ wobei $A_k$ obere $k\times
+	k$-Matrix.
+\item[iiii)] Alle Eigenwerte von $A$ sind positiv.
+\item[iiiii)] Für $P_A$ gilt
+	$A\text{ positiv definit}  \iff \left\{ 
+\begin{aligned}
+    \alpha_j>0& \quad \text{für $j$ gerade} \\
+    \alpha_j<0& \quad \text{für $j$ ungerade.}
+\end{aligned}
+\right.$
+\end{itemize}
+
+\newpage
+
+\begin{center}
+	\includegraphics[width=8cm]{src/cat.jpg}
+
+Viel Glück bei der Klausur
+\end{center}
 
 \end{document}
-
